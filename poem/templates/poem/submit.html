@@ -1,0 +1,65 @@
+<html>
+	<head>
+		<title>Submit</title>
+		{% load staticfiles %}
+		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="{% static 'poem/style/main.css' %}">
+		<!-- <style type="text/css">
+			.input-section {
+				padding-bottom: 2em;
+				background-color: black;
+			}
+		</style> -->
+	</head>
+	<body>
+		<div class = "container">
+			<h1 class = "col-md-offset-2 col-md-8">Enter Poem</h1>
+			<form action="/submit" method = "post">
+			<div class = "col-xs-offset-2 col-xs-8">
+				{% csrf_token %}
+
+				{% for field in form %}
+
+					<div class = "row">
+						<div class="input-section">
+							{{ field.label_tag }} {{ field }}
+							
+							{% if form.errors %}
+					            {% for error in field.errors %}
+					            <p class="error-message small">{{ error|escape }}</p>
+					            {% endfor %}
+					        {% endif %}
+					        {% if field.help_text %}
+						        <p class="help">{{ field.help_text|safe }}</p>
+						    {% endif %}
+						</div>
+					
+					</div>
+				{% endfor %}
+			
+				<!-- <div class = "input-section row">
+					<label class="input-item col-md-offset-2 col-md-8">Title:</label>
+				    <input class="input-item col-md-offset-2 col-md-8" type="text" name="title"/>
+				</div>
+			    <div class = "input-section row">
+			    	<label class="input-item col-md-offset-2 col-md-8">Text:</label>
+			    	<textarea class="input-item col-md-offset-2 col-md-8" rows = "10" cols = "30" name="text"></textarea>
+			    </div>
+			    <div class = "input-section row">
+				    <label class="input-item col-md-offset-2 col-md-8">Source:</label>
+				    <input class="input-item col-md-offset-2 col-md-8" type="text" name="source">
+				</div>
+				<div class = "input-section row">
+				    <label class="input-item col-md-offset-2 col-md-8">Author ID:</label>
+				    <input class="input-item col-md-offset-2 col-md-8" type="number" name="author_id">
+			    </div>
+			    <!-- <input class="input-item col-md-offset-2 col-md-8" type="datetime-local" name="creation"> -->
+					<div class = "input-section row">	
+						<input class="" type="submit" value="Submit" />
+					</div> 
+				</div>
+			</form>
+		</div>
+	</body>
+</html>

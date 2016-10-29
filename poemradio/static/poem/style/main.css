@@ -1,0 +1,117 @@
+p, h1, .glyphicon {
+	color: #FCFCFC;
+	white-space: pre-wrap; 
+	text-align: center;
+}
+.glyphicon {
+	font-size: 1.3em;
+}
+.input-section {
+	margin-bottom: 1em;
+	text-align: center;
+}
+.btn {
+	background-color:#D3CFFF;
+	color:  #6056B2;
+}
+p {
+	font-size: 1.5em;
+}
+
+h1 {
+	text-align: center;
+}
+.small {
+	font-size: .75em;
+}
+.text-center {
+	text-align: center;
+}
+.frame {
+
+	height: 80vh;
+	overflow-y: scroll;
+}
+.vote-btn {
+	border-radius: 10px;
+	text-align: center;
+	cursor: pointer;
+}
+/*body {
+	background-color: #6056B2;
+}*/
+.glyphicon-thumbs-up {
+	float: right;
+}
+.tag {
+	background-color: #D3CFFF;
+	border-radius: 2px;
+	margin: 3px;
+	padding: 3px;
+	padding-bottom: 1px;
+	padding-top: 1px;
+}
+.tag-holder {
+	border-top: 2px solid #D3CFFF;
+	border-radius: 4px;
+	margin-top: 10px;
+}
+.inner-tag-holder {
+	margin: 5px;
+}
+.poem-text {
+	word-wrap: normal;
+}
+a, a:hover,  a:active, a:visited {
+	color: inherit;
+	text-decoration: none;
+}
+
+
+body {
+  width: 100%;
+  height: 100%;
+  animation: pulse 600s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: #001F3F;
+  }
+  10% {
+    background-color: #63b7a8;
+  }
+  20% {
+    background-color: #871451;
+  }
+  30% {
+    background-color: #e86a6a;
+  }
+  40% {
+    background-color: #556d8c;
+  }
+  50% {
+    background-color: #5392c5;
+  }
+  60% {
+    background-color: #562656;
+  }
+  70% {
+    background-color: #e86a6a;
+  }
+  80% {
+    background-color: #556d8c;
+  }
+  90% {
+    background-color: #2a5b48;
+  }
+
+  100% {
+    background-color: #001F3F;
+  }
+}
+
+/*html,
+body {
+  height: 100%;
+}*/
