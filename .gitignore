@@ -1,2 +1,9 @@
-secretkey
+poemradio/secretkey
 *.pyc
+*.csv
+*.sublime*
+venv
+*.pyc
+staticfiles
+.env
+

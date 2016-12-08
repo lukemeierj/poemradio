@@ -1,130 +1,52 @@
-<head>
-	<script   src="https://code.jquery.com/jquery-3.1.0.js"   integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk="   crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-	<script type="text/javascript">
-		function getCookie(name) {
-		    var cookieValue = null;
-		    if (document.cookie && document.cookie != '') {
-		        var cookies = document.cookie.split(';');
-		        for (var i = 0; i < cookies.length; i++) {
-		            var cookie = jQuery.trim(cookies[i]);
-		            // Does this cookie string begin with the name we want?
-		            if (cookie.substring(0, name.length + 1) == (name + '=')) {
-		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-		                break;
-		            }
-		        }
-		    }
-		    return cookieValue;
-		}
-		var csrftoken = getCookie('csrftoken');
-		function csrfSafeMethod(method) {
-	    // these HTTP methods do not require CSRF protection
-	    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-		}
-		$.ajaxSetup({
-		    beforeSend: function(xhr, settings) {
-		        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-		            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-		        }
-		    }
-		});
-	</script>
-	{% load staticfiles %}
-	<link rel="stylesheet" type="text/css" href="{% static './poem/style/main.css' %}">
-	<title>PoemRad.io</title>
-</head>
-<body>
-	<div class = "frame">
-		<div class = "container" >
-			<div class = "poemContent" data-pk="-1">
-				<h1></h1>
-			</div>
-		</div>
-	</div>
-	<div class = "col-md-offset-4 col-md-4">
-		<button class="text-center btn btn-default" id='next'>Next</button>
-	</div>
-	<script type="text/javascript">
-		(function(){
-			var queue = {{ queue }},
-			username = '{{ request.user }}',
-			nextQueue = [],
-			nextBtn = $('#next'),
-			container = $(".container"), 
-			vote = 0,
-			windowVar = $(window),
-			buttonClass = '.vote-btn',
-			queueRequested = false;
-			function requestPoem(poemID, loc) {
-					var baseURL = '';
-					return baseURL + poemID + " " + loc;
-				}
-			function changeVote(btnObj) {
-				vote = btnObj.data('vote')
-				// console.log(vote)
-			}
-			function voteListener(buttonClass) {
-				buttonClassVar = $(buttonClass); //Initial queue, provided in request
-				buttonClassVar.on('click', function() {
-					changeVote($(this));
-				})
-			}
-			function markRead() {
-				end = new Date()
-				data = {'poemID': poemID, 'start': start.getTime(), 'end': end.getTime(), 'vote': vote, 'username': username}
-				$.post("/markRead", data);
-				console.log(data);
-				vote = 0
+{% extends "poem/base.html" %}
 
-			}
-			container.fadeOut(200, function () {
-							poemID = queue.pop()
-							start = new Date()
-							container.load(requestPoem(poemID, ".poemContent"), function( ) {
-									voteListener(buttonClass)
-									container.fadeIn(200);
-								});
-						});	
-			// windowVar.on('beforeunload', function () {
-			// 	console.log("unload");
-			// 	alert("WhTF");
-			// 	end = new Date();
-			// 	$.post("markRead", data = {'poemID': poemID, 'start': start.getTime(), 'end': end.getTime(), 'vote': vote, 'voteType': voteType, 'username': username})
-			// });
-			// 
-			// $(document).on("blur focus focusin focusout load resize scroll unload click dblclick  change select submit keydown keypress keyup error contextmenu, onbeforeunload", function(e){
-			//      console.log(e);
-			// });
-			
-			nextBtn.on('click', function () {
-				markRead();
-				poemID = queue.pop();
-				console.log("current queue:", queue)
-				console.log("next queue:", nextQueue)
+{% block title %}PoemRad.io{% endblock %}
 
-				if (queue.length == 0) {
-					queue = nextQueue;
-					nextQueue = [];
-				}
-				if ((queue.length == 3)&&(!queueRequested)) {
-					queueRequested = true;
-					$.getJSON('user/' + username + '/getQueue', function (data) {
-						queueRequested = false;
-						username = data['username'];
-						nextQueue = data['queue'];
-					} )
-				}
-				// buttonClassVar.off()
-				container.fadeOut(300, function () {
-					container.load(requestPoem(poemID, ".poemContent"), function( ) {
-									container.fadeIn(300);
-									start = new Date()
-									voteListener(buttonClass)
-								});
-				})
+{% block mainCode %}
+
+<script type="text/javascript">
+	(function(){
+				var queue = {{ queue }},
+				nextQueue = [],
+				queueRequested = false;
+
+				container.fadeOut(200, function () {
+								poemID = queue.pop()
+								start = new Date()
+								container.load(requestPoem(poemID, ".poemContent"), function( ) {
+										voteListener(buttonClass)
+										container.fadeIn(200);
+									});
+							});	
 				
-			})
-		})();
-	</script>
-</body>
+				nextBtn.on('click', function () {
+					markRead();
+					poemID = queue.pop();
+					console.log("current queue:", queue)
+					console.log("next queue:", nextQueue)
+
+					if (queue.length == 0) {
+						queue = nextQueue;
+						nextQueue = [];
+					}
+					if ((queue.length == 3)&&(!queueRequested)) {
+						queueRequested = true;
+						$.getJSON('user/' + username + '/getQueue', function (data) {
+							queueRequested = false;
+							username = data['username'];
+							nextQueue = data['queue'];
+						} )
+					}
+					container.fadeOut(300, function () {
+						container.load(requestPoem(poemID, ".poemContent"), function( ) {
+										container.fadeIn(300);
+										start = new Date()
+										voteListener(buttonClass)
+									});
+					})
+					
+				})
+			})();
+		</script>
+
+{% endblock %}
