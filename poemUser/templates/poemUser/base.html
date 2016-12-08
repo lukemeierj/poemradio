@@ -1,0 +1,69 @@
+<head>
+    <script   src="https://code.jquery.com/jquery-3.1.0.js"   integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk="   crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script type="text/javascript">
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie != '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        var csrftoken = getCookie('csrftoken');
+        function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+    </script>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static './poem/style/main.css' %}">
+    <title>{% block title %} PoemRad.io {% endblock %}</title>
+</head>
+<body>
+
+    <div id = "menu" class = "navbar navbar-fixed-top">
+        <div class = "row">
+            <div class = "col-xs-3 top">
+                <a href="./"><p>PoemRad.io</p></a>
+            </div>
+            <div class = "col-xs-3 top">
+                <a href ="./submit"><p>Submit a poem</p></a>
+            </div>
+            <div class = "col-xs-3 top">
+                <a href = ./signup><p>Sign up</p></a>
+            </div>
+            <div class = "col-xs-3 top">
+                <a href = "./login"><p>Log in</p></a>
+            </div>
+        </div>
+    </div>
+    <div class = "frame">
+        
+        <div class = "container col-xs-6 col-xs-offset-3" >
+            {% block content %}
+
+            {% endblock %}
+        </div>
+    </div>
+    {% block navBar %}
+
+    {% endblock %}
+    {% block mainCode %}
+          <!-- Code specific to the page -->
+    {% endblock %}
+</body>

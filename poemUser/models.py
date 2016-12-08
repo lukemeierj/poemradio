@@ -44,7 +44,6 @@ class PoemUser(models.Model):
     user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
     safeMode = models.BooleanField(default = False)
     preferences = models.ManyToManyField('tags.Tag', blank=True)
-    queue = models.TextField(default=json.dumps({}))
     similar = models.ManyToManyField('self', default = [])
     
     #Returns lists in tuple, (selfVotes, foreignVotes)

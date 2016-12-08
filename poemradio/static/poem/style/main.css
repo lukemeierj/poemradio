@@ -1,15 +1,43 @@
-p, h1, .glyphicon {
+p, h1, h2, .glyphicon {
 	color: #FCFCFC;
 	white-space: pre-wrap; 
 	text-align: center;
 }
 .glyphicon {
-	font-size: 1.3em;
+  padding-right: .5em;
+  padding-top: .15em;
+	font-size: 2.75em;
 }
-.input-section {
-	margin-bottom: 1em;
-	text-align: center;
+
+input, textarea{
+-webkit-border-radius: 30px;
+-moz-border-radius: 30px;
+border-radius: 30px;
+border-color:  #63b7a8;
+background-color:  #63b7a8;
 }
+.submit-input textarea {
+  border: none;
+  width: 100%;
+}
+
+
+.input-section input {
+float: right;
+
+}
+.input-section label{
+  float:left;
+}
+
+form p {
+
+  padding-bottom: .75em;
+}
+h2 {
+  padding-bottom: 1em;
+}
+
 .btn {
 	background-color:#D3CFFF;
 	color:  #6056B2;
@@ -18,7 +46,7 @@ p {
 	font-size: 1.5em;
 }
 
-h1 {
+.head-title {
 	text-align: center;
 }
 .small {
@@ -27,22 +55,20 @@ h1 {
 .text-center {
 	text-align: center;
 }
-.frame {
+/*.frame {
 
 	height: 80vh;
 	overflow-y: scroll;
-}
-.vote-btn {
+}*/
+/*.vote-btn {
 	border-radius: 10px;
 	text-align: center;
 	cursor: pointer;
-}
+}*/
 /*body {
 	background-color: #6056B2;
 }*/
-.glyphicon-thumbs-up {
-	float: right;
-}
+
 .tag {
 	background-color: #D3CFFF;
 	border-radius: 2px;
@@ -66,9 +92,23 @@ a, a:hover,  a:active, a:visited {
 	color: inherit;
 	text-decoration: none;
 }
+#nav {
+  animation: pulse 500s infinite;
+  height: 7vh;
+
+}
+#menu{
+  animation: pulse 500s infinite;
+  height: 8vh;
+}
+#menu p {
+  padding-top: 2vh;
+}
 
 
 body {
+  padding-top: 8vh;
+  padding-bottom: 10vh;
   width: 100%;
   height: 100%;
   animation: pulse 600s infinite;

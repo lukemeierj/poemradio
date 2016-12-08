@@ -10,16 +10,7 @@
 				nextQueue = [],
 				queueRequested = false;
 
-				container.fadeOut(200, function () {
-								poemID = queue.pop()
-								start = new Date()
-								container.load(requestPoem(poemID, ".poemContent"), function( ) {
-										voteListener(buttonClass)
-										container.fadeIn(200);
-									});
-							});	
-				
-				nextBtn.on('click', function () {
+				function nextPage(){
 					markRead();
 					poemID = queue.pop();
 					console.log("current queue:", queue)
@@ -44,9 +35,55 @@
 										voteListener(buttonClass)
 									});
 					})
+				}
+				container.fadeOut(200, function () {
+								poemID = queue.pop()
+								start = new Date()
+								container.load(requestPoem(poemID, ".poemContent"), function( ) {
+										voteListener(buttonClass)
+										container.fadeIn(200);
+									});
+							});	
+				
+				nextBtn.on('keydown click', function(e){
+					nextPage();
+				});
+
+				$(Document).on('keydown', function(e){
+					if(e.which == 39){
+						nextPage();
+					}
+					else if(e.which == 76 || e.which == 38){
+						if(vote == 1){
+							vote = 0;
+						}
+						else{
+							vote = 1;
+						}
+					}
+					else if(e.which == 68 || e.which == 40){
+						if(vote == -1){
+							vote = 0;
+						}
+						else{
+							vote = -1;
+						}
+					}
 					
 				})
+
 			})();
 		</script>
 
+{% endblock %}
+
+{% block navBar %}
+
+	<div id = "nav" class = "navbar-fixed-bottom">
+		<div class = "row">
+			<div class = "text-center col-xs-offset-5 vote-btn glyphicon glyphicon-thumbs-down" data-vote = "-1"></div>
+			<div class = "text-center vote-btn glyphicon glyphicon-thumbs-up" data-vote = "1"></div>
+			<div class = "text-center glyphicon glyphicon-triangle-right" id = "next"></div>
+		</div>
+	</div>
 {% endblock %}

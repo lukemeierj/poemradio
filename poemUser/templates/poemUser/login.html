@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html>
-    <head>
-         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        {% load staticfiles %}
-        <link rel="stylesheet" type="text/css" href="{% static './poem/style/main.css' %}">
-        <title>Log In</title>
-    </head>
+{% extends "poemUser/base.html" %}
 
-    <body>
-        <h1>Log In</h1>
+{% block title %}Log in{% endblock %}
+
+{% block content %}
+        <h2 class = "head-title">Log In</h2>
 
         {% if user.is_authenticated %}
         <p><strong>You're already logged in as {{ user.username }}.</strong><p>
@@ -20,6 +15,7 @@
         <form id="user_form" method="post" action="./login?next={{next}}"
                 enctype="multipart/form-data">
         {%else%}
+
         <form id="user_form" method="post" action="./login"
                 enctype="multipart/form-data">
         {% endif %}
@@ -34,8 +30,7 @@
             {% endif %}
 
             <!-- Provide a button to click to submit the form. -->
-            <input type="submit" name="submit" value="Log In" />
+            <input class = "col-xs-offset-5 col-xs-2" type="submit" name="submit" value="Log In" />
         </form>
         {% endif %}
-    </body>
-</html>
+{% endblock %}

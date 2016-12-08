@@ -35,8 +35,26 @@
 	<title>{% block title %} PoemRad.io {% endblock %}</title>
 </head>
 <body>
+
+	<div id = "menu" class = "navbar navbar-fixed-top">
+		<div class = "row">
+			<div class = "col-xs-3 top">
+				<a href="./"><p>PoemRad.io</p></a>
+			</div>
+			<div class = "col-xs-3 top">
+				<a href="./submit"><p>Submit a poem</p></a>
+			</div>
+			<div class = "col-xs-3 top">
+				<a href = ./signup><p>Sign up</p></a>
+			</div>
+			<div class = "col-xs-3 top">
+				<a href = "./login"><p>Log in</p></a>
+			</div>
+		</div>
+	</div>
 	<div class = "frame">
-		<div class = "container col-xs-6 col-xs-offset-3" >
+		
+		<div class = "container col-xs-10 col-xs-offset-1" >
 			{% block poemContent %}
 			<div class = "poemContent" data-pk="-1">
 
@@ -46,10 +64,9 @@
 			{% endblock %}
 		</div>
 	</div>
+	{% block navBar %}
 
-	<div class = "col-md-offset-4 col-md-4">
-		<button class="text-center btn btn-default" id='next'>Next</button>
-	</div>
+	{% endblock %}
 	<script type="text/javascript">
 				var nextBtn = $('#next'),
 				username = '{{ request.user }}',
@@ -62,13 +79,10 @@
 						var baseURL = '';
 						return baseURL + poemID + " " + loc;
 					}
-				function changeVote(btnObj) {
-					vote = btnObj.data('vote')
-				}
 				function voteListener(buttonClass) {
 					buttonClassVar = $(buttonClass); //Initial queue, provided in request
 					buttonClassVar.on('click', function() {
-						changeVote($(this));
+						vote = $(this).data('vote');
 					})
 				}
 				function markRead() {
@@ -78,6 +92,37 @@
 					console.log(data);
 					vote = 0
 
+				}
+				function nextPoem(queue, nextQueue, queueRequested) {
+					markRead();
+					poemID = queue.pop();
+					console.log("current queue:", queue)
+					console.log("next queue:", nextQueue)
+
+					if (queue.length == 0) {
+						queue = nextQueue;
+						nextQueue = [];
+					}
+
+					container.fadeOut(300, function () {
+						container.load(requestPoem(poemID, ".poemContent"), function( ) {
+										container.fadeIn(300);
+										start = new Date()
+										voteListener(buttonClass)
+									});
+					})
+					
+					if ((queue.length == 3)&&(!queueRequested)) {
+						queueRequested = true;
+						$.getJSON('user/' + username + '/getQueue', function (data) {
+							queueRequested = false;
+							username = data['username'];
+							nextQueue = data['queue'];
+							console.log("HEY", nextQueue);
+							return [queue, nextQueue, queueRequested];
+						} )
+					}
+					return [queue, nextQueue, queueRequested];
 				}
 	</script>
 	{% block mainCode %}
