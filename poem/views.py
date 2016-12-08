@@ -10,8 +10,6 @@ from django.contrib.auth.models import User
 from poemUser.models import PoemUser, Read
 from django.utils import timezone
 
-import json
-
 
 @require_safe
 def showPoem(request, poemID):
