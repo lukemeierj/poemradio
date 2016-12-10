@@ -6,7 +6,7 @@
         <h2 class = "head-title">Register with PoemRad.io</h2>
 
         {% if registered %}
-        <strong>thank you for registering!</strong>
+        <p>thank you for registering!</p>
         <a href="../">Return to the homepage.</a><br />
         {% else %}
 
@@ -22,7 +22,7 @@
             {{ poemUser_form.as_p }}
 
             <!-- Provide a button to click to submit the form. -->
-            <input class = "col-xs-offset-5 col-xs-2" type="submit" name="submit" value="Register" />
+            <input class="col-xs-offset-5 col-xs-2" type="submit" name="submit" value="Register" />
         </form>
         {% endif %}
 {% endblock %}

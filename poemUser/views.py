@@ -69,14 +69,22 @@ def register(request):
                 password = user_form.cleaned_data['password']
                 first_name = user_form.cleaned_data['first_name']
                 last_name = user_form.cleaned_data['last_name']
-                user          = User(username = username, last_name = last_name, first_name=first_name)
-                user.set_password(user.password)
+                email     = user_form.cleaned_data['email']
+                user          = User(username = username, last_name = last_name, first_name=first_name, email=email)
+                user.set_password(password)
                 user.save()
                 # print(user.username)
                 poemUser      = poemUser_form.save(commit=False)
                 poemUser.user = user
                 poemUser.save()
                 registered    = True
+                user = authenticate(username=username, password=password)
+                if user:
+                    if user.is_active:
+                        login(request, user)
+                    else:
+                        # An inactive account was used - no logging in!
+                        return HttpResponse("Your account is disabled.")
             else: 
                 user_form.add_error('username', "User already exists.")
         # else:
@@ -85,7 +93,6 @@ def register(request):
     else:
         poemUser_form = PoemUserForm(request.POST or None)
         user_form = UserForm(request.POST or None)
-    print(registered)
 
 
     return render(request, 'poemUser/signup.html',

@@ -1,7 +1,10 @@
 <head>
-	<script   src="https://code.jquery.com/jquery-3.1.0.js"   integrity="sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk="   crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-	<script type="text/javascript">
+	{% load staticfiles %}
+	<script src="{% static './poem/js/jquery.min.js' %}"></script>
+	<link rel="stylesheet" type="text/css" href="{% static './poem/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static './poem/style/main.css' %}">
+	<title>{% block title %} PoemRad.io {% endblock %}</title>
+<script type="text/javascript">
 		function getCookie(name) {
 		    var cookieValue = null;
 		    if (document.cookie && document.cookie != '') {
@@ -30,9 +33,7 @@
 		    }
 		});
 	</script>
-	{% load staticfiles %}
-	<link rel="stylesheet" type="text/css" href="{% static './poem/style/main.css' %}">
-	<title>{% block title %} PoemRad.io {% endblock %}</title>
+	
 </head>
 <body>
 
@@ -42,7 +43,7 @@
 				<a href="./"><p>PoemRad.io</p></a>
 			</div>
 			<div class = "col-xs-3 top">
-				<a href="./submit"><p>Submit a poem</p></a>
+				<a href="./submit"><p>Submit poetry</p></a>
 			</div>
 			<div class = "col-xs-3 top">
 				<a href = ./signup><p>Sign up</p></a>
@@ -59,6 +60,7 @@
 			<div class = "poemContent" data-pk="-1">
 
 				<h1></h1>
+				<!-- <p>PoemRad.io operates uses Javascript to show you the poems you want to see.  Make sure to <a href = "http://www.enable-javascript.com">enable Javascript.</a>  There have also been bugs using Apple's Safari browser.</p> -->
 
 			</div>
 			{% endblock %}
@@ -68,62 +70,46 @@
 
 	{% endblock %}
 	<script type="text/javascript">
-				var nextBtn = $('#next'),
-				username = '{{ request.user }}',
-				container = $(".container"),
-				vote = 0,
-				windowVar = $(window),
-				buttonClass = '.vote-btn',
-				poemID = $('.poemContent').data('pk');
-				function requestPoem(poemID, loc) {
-						var baseURL = '';
-						return baseURL + poemID + " " + loc;
-					}
-				function voteListener(buttonClass) {
-					buttonClassVar = $(buttonClass); //Initial queue, provided in request
-					buttonClassVar.on('click', function() {
-						vote = $(this).data('vote');
-					})
-				}
-				function markRead() {
-					end = new Date()
-					data = {'poemID': poemID, 'start': start.getTime(), 'end': end.getTime(), 'vote': vote, 'username': username}
-					$.post("/markRead", data);
-					console.log(data);
-					vote = 0
+		var nextBtn = $('#next'),
+		username = '{{ request.user }}',
+		container = $(".container"),
+		vote = 0,
+		windowVar = $(window),
+		buttonClass = '.vote-btn',
+		poemID = $('.poemContent').data('pk');
+		function requestPoem(poemID, loc) {
+				var baseURL = './';
+				return baseURL + poemID + " " + loc;
+			}
+		function changeVote(vt){
+			if(vt == 1){
+				$('.downvote').removeClass("pressed");
+				$('.upvote').addClass("pressed");
+			}
+			else if(vt == -1){
+				$('.downvote').addClass("pressed");
+				$('.upvote').removeClass("pressed");
+			}
+			else{
+				$('.downvote').removeClass('pressed');
+				$('.upvote').removeClass('pressed');
+			}
+			return vt;
+		}
+		function voteListener(buttonClass) {
+			buttonClassVar = $(buttonClass); //Initial queue, provided in request
+			buttonClassVar.on('click', function() {
+				vote = changeVote($(this).data('vote'));
+			})
+		}
+		function markRead() {
+			end = new Date()
+			data = {'poemID': poemID, 'start': start.getTime(), 'end': end.getTime(), 'vote': vote, 'username': username}
+			$.post("./markRead", data);
+			console.log(data);
+			vote = changeVote(0);
 
-				}
-				function nextPoem(queue, nextQueue, queueRequested) {
-					markRead();
-					poemID = queue.pop();
-					console.log("current queue:", queue)
-					console.log("next queue:", nextQueue)
-
-					if (queue.length == 0) {
-						queue = nextQueue;
-						nextQueue = [];
-					}
-
-					container.fadeOut(300, function () {
-						container.load(requestPoem(poemID, ".poemContent"), function( ) {
-										container.fadeIn(300);
-										start = new Date()
-										voteListener(buttonClass)
-									});
-					})
-					
-					if ((queue.length == 3)&&(!queueRequested)) {
-						queueRequested = true;
-						$.getJSON('user/' + username + '/getQueue', function (data) {
-							queueRequested = false;
-							username = data['username'];
-							nextQueue = data['queue'];
-							console.log("HEY", nextQueue);
-							return [queue, nextQueue, queueRequested];
-						} )
-					}
-					return [queue, nextQueue, queueRequested];
-				}
+		}
 	</script>
 	{% block mainCode %}
 	      <!-- Code specific to the page -->

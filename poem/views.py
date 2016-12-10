@@ -84,7 +84,8 @@ def markRead(request):
             try:
                 poemuser = User.objects.get(username=request.POST['username'].lower()).poemuser
             except User.DoesNotExist:
-                raise Http404("User does not exist")
+                print("IN HERE")
+
             else:
                 try: 
                     read = poemuser.reads.get(poem_id = poemID)

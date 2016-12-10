@@ -2,6 +2,22 @@
 
 {% block title %}PoemRad.io{% endblock %}
 
+
+
+
+{% block navBar %}
+
+	<div id = "nav" class = "navbar-fixed-bottom">
+		<div class = "row">
+			<div class = "text-center">
+				<div class = "text-center vote-btn glyphicon glyphicon-thumbs-down downvote" data-vote = "-1"></div>
+				<div class = "text-center glyphicon glyphicon-triangle-right" id = "next"></div>
+				<div class = "text-center vote-btn glyphicon glyphicon-thumbs-up upvote" data-vote = "1"></div>
+			</div>
+			
+		</div>
+	</div>
+{% endblock %}
 {% block mainCode %}
 
 <script type="text/javascript">
@@ -26,13 +42,15 @@
 							queueRequested = false;
 							username = data['username'];
 							nextQueue = data['queue'];
+
 						} )
 					}
 					container.fadeOut(300, function () {
 						container.load(requestPoem(poemID, ".poemContent"), function( ) {
 										container.fadeIn(300);
-										start = new Date()
-										voteListener(buttonClass)
+										start = new Date();
+										voteListener(buttonClass);
+										// changeVote(0);
 									});
 					})
 				}
@@ -44,46 +62,39 @@
 										container.fadeIn(200);
 									});
 							});	
-				
-				nextBtn.on('keydown click', function(e){
+
+				nextBtn.click(function(e){
 					nextPage();
 				});
 
-				$(Document).on('keydown', function(e){
+
+
+			
+
+				$(document).on('keydown', function(e){
 					if(e.which == 39){
 						nextPage();
 					}
-					else if(e.which == 76 || e.which == 38){
+					else if(e.which == 76){
 						if(vote == 1){
-							vote = 0;
+							changeVote(0);
 						}
 						else{
-							vote = 1;
+							changeVote(1);
 						}
 					}
-					else if(e.which == 68 || e.which == 40){
+					else if(e.which == 68 || e.which == 186){
 						if(vote == -1){
-							vote = 0;
+							changeVote(0);
 						}
 						else{
-							vote = -1;
+							changeVote(-1);
 						}
 					}
 					
-				})
+				});
 
 			})();
 		</script>
 
-{% endblock %}
-
-{% block navBar %}
-
-	<div id = "nav" class = "navbar-fixed-bottom">
-		<div class = "row">
-			<div class = "text-center col-xs-offset-5 vote-btn glyphicon glyphicon-thumbs-down" data-vote = "-1"></div>
-			<div class = "text-center vote-btn glyphicon glyphicon-thumbs-up" data-vote = "1"></div>
-			<div class = "text-center glyphicon glyphicon-triangle-right" id = "next"></div>
-		</div>
-	</div>
 {% endblock %}
