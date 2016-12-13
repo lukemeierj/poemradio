@@ -99,7 +99,21 @@
 		function voteListener(buttonClass) {
 			buttonClassVar = $(buttonClass); //Initial queue, provided in request
 			buttonClassVar.on('click', function() {
-				vote = changeVote($(this).data('vote'));
+				var newVote = $(this).data('vote');
+
+				if(username.toLowerCase() == "anonymoususer"){
+				container.fadeOut(300, function () {
+					container.load("./login", ".poemContent", function( ) {
+							container.fadeIn(200);
+						});
+					});
+				}
+				else{
+					if(newVote == vote){
+						changeVote(0);
+					}
+					vote = changeVote(newVote);
+				}
 			})
 		}
 		function markRead() {

@@ -28,6 +28,24 @@ input, textarea{
   /*border-color:  #63b7a8;
   background-color:  #63b7a8;*/
 }
+
+::-webkit-input-placeholder { /* Chrome */
+  color: white;
+
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: white;
+
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: white;
+  opacity: 1;
+
+}
+:-moz-placeholder { /* Firefox 4 - 18 */
+  color: white;
+}
+
 .submit-input textarea {
   width: 100%;
   height: 50vh;
