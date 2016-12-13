@@ -6,7 +6,7 @@
         <h2 class = "head-title">Log In</h2>
 
         {% if user.is_authenticated %}
-        <p><strong>You're already logged in as {{ user.username }}.</strong><p>
+        <p ><strong>You're already logged in as {{ user.username }}.</strong><p>
         <a href="../">Return to the homepage.</a><br />
         <a href="./logout">Log out</a>
         {% else %}

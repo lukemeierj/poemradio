@@ -48,19 +48,19 @@ input, textarea{
 
 .submit-input textarea {
   width: 100%;
-  height: 50vh;
+  /*height: 50vh;*/
   text-align: center;
-  font-size: .75em;
+  font-size: 1em;
 }
 
 
-.input-section input {
+/*.input-section input {
   float: right;
 
 }
 .input-section label{
   float:left;
-}
+}*/
 
 form p {
   padding-bottom: .75em;
@@ -76,6 +76,7 @@ h2 {
 p {
 	font-size: 1.5em;
 }
+
 
 .head-title {
 	text-align: center;
