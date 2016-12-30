@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -24,16 +23,25 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 
 
-SECRET_KEY = os.environ['secret_KEY']
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+SECRET_KEY = os.environ['SECRET_KEY']
 
-ALLOWED_HOSTS = []
+DEBUG = False
 
-LOGIN_URL = '/login'
+ALLOWED_HOSTS = ['localhost', '127.0.0.1','.poemrad.io']
+
+LOGIN_URL = '/accounts/login'
+LOGIN_REDIRECT_URL = "/"
 # Application definition
 
 INSTALLED_APPS = [
+# The Django sites framework is required
+    'django.contrib.sites',
+    'anymail',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.facebook',
+    # 'allauth.socialaccount.providers.google',
     'poemUser.apps.PoemuserConfig',
     'poem.apps.PoemConfig',
     'tags.apps.TagsConfig',
@@ -44,6 +52,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+SITE_ID = 2
+
+# ACCOUNT_SIGNUP_FORM_CLASS = 'poemUser.forms.UserForm'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED =True
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_PRESERVE_USERNAME_CASING = False
+
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -56,16 +73,27 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# AUTHENTICATION_BACKENDS = ('poemradio.backends.CaseInsensitiveModelBackend',)
+
 
 ROOT_URLCONF = 'poemradio.urls'
+
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+
+
+
+# TEMPLATE_LOADERS = (
+#     'django.template.loaders.filesystem.Loader',
+#     'django.template.loaders.app_directories.Loader',
+# #     'django.template.loaders.eggs.Loader',
+# )
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(PROJECT_ROOT, "..", 'templates').replace('\\','/'),],
         'APP_DIRS': True,
         'OPTIONS': {
+            'debug': True,
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -75,6 +103,18 @@ TEMPLATES = [
         },
     },
 ]
+
+
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+
 
 WSGI_APPLICATION = 'poemradio.wsgi.application'
 
@@ -163,4 +203,24 @@ STATICFILES_DIRS = (
 # https://warehouse.python.org/project/whitenoise/
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+ACCOUNT_SIGNUP_FORM_CLASS = 'poemUser.forms.SignupForm'
+
+
+try:
+    from .local_settings import *
+except ImportError as e:
+    pass
+
+SECRET_KEY = os.environ['MAILGUN_API_KEY']
+
+ANYMAIL = {
+
+    # (exact settings here depend on your ESP...)
+    "MAILGUN_API_KEY": os.environ['MAILGUN_API_KEY'],
+    "MAILGUN_SENDER_DOMAIN": 'mg.poemrad.io',  # your Mailgun domain, if needed
+}
+EMAIL_BACKEND = "anymail.backends.mailgun.MailgunBackend"  # or sendgrid.SendGridBackend, or...
+DEFAULT_FROM_EMAIL = "Little PoemRad.io Robot <lilrobot@poemrad.io>"  # if you don't already have this in settings
+
 

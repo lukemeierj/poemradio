@@ -1,7 +1,16 @@
-p, h1, h2, .glyphicon, input  {
+p, h1, h2, h3, .glyphicon, input, label  {
 	color: #FCFCFC;
 	white-space: pre-wrap; 
 	text-align: center;
+}
+h3 {
+  font-size: 1.5em;
+  color: #FCFCFC;
+
+}
+.ctrlholder {
+
+  display: inline;
 }
 .pressed {
   color: #bfc0c1;
@@ -17,10 +26,12 @@ p, h1, h2, .glyphicon, input  {
   vertical-align: .5vh;
 }
 
-input, textarea{
+input, textarea, button{
+  /*width: 35%;*/
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
   border-radius: 10px;
+  background-color: #556d8c;
   animation: pulseFrame 600s infinite;
   border: none;
 
@@ -28,22 +39,30 @@ input, textarea{
   /*border-color:  #63b7a8;
   background-color:  #63b7a8;*/
 }
+button {
+  text-align: center;
+}
 
 ::-webkit-input-placeholder { /* Chrome */
+  text-transform: lowercase;
   color: white;
 
 }
 :-ms-input-placeholder { /* IE 10+ */
   color: white;
+  text-transform: lowercase;
 
 }
 ::-moz-placeholder { /* Firefox 19+ */
   color: white;
   opacity: 1;
+  text-transform: lowercase;
 
 }
 :-moz-placeholder { /* Firefox 4 - 18 */
   color: white;
+  text-transform: lowercase;
+
 }
 
 .submit-input textarea {
@@ -62,6 +81,20 @@ input, textarea{
   float:left;
 }*/
 
+.no-label label {
+  display: none;
+}
+label[for=id_remember]
+{
+  vertical-align: middle;
+  font-size: .75em;
+  display: inline;
+}
+.small {
+  font-size: .85em;
+}
+
+
 form p {
   padding-bottom: .75em;
 }
@@ -74,16 +107,14 @@ h2 {
 	color:  #6056B2;
 }
 p {
-	font-size: 1.5em;
+	font-size: 1.25em;
 }
 
 
 .head-title {
 	text-align: center;
 }
-.small {
-	font-size: .75em;
-}
+
 .text-center {
 	text-align: center;
 }

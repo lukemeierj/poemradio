@@ -11,6 +11,7 @@ from poemUser.models import PoemUser, Read
 from django.utils import timezone
 
 
+
 @require_safe
 def showPoem(request, poemID):
     poemObj  = get_object_or_404(Poem, pk=poemID)
@@ -40,7 +41,7 @@ def jsonPoem(request, poemID):
     response = JsonResponse(json)
     return response
 
-@login_required(login_url = reverse_lazy('login'))
+@login_required(login_url = reverse_lazy('account_login'))
 def submit(request):
     if request.method == "POST":
         form = SubmitPoemForm(request.POST)

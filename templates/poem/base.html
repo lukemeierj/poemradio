@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block queueCode %} 
+ <script type="text/javascript">
+        var nextBtn = $('#next'),
+        username = '{{ request.user }}',
+        container = $(".container"),
+        vote = 0,
+        windowVar = $(window),
+        buttonClass = '.vote-btn',
+        poemID = $('.poemContent').data('pk');
+        function requestPoem(poemID, loc) {
+                var baseURL = './';
+                return baseURL + poemID + " " + loc;
+            }
+        function changeVote(vt){
+            if(vt == 1){
+                $('.downvote').removeClass("pressed");
+                $('.upvote').addClass("pressed");
+            }
+            else if(vt == -1){
+                $('.downvote').addClass("pressed");
+                $('.upvote').removeClass("pressed");
+            }
+            else{
+                $('.downvote').removeClass('pressed');
+                $('.upvote').removeClass('pressed');
+            }
+            return vt;
+        }
+        function voteListener(buttonClass) {
+            buttonClassVar = $(buttonClass); //Initial queue, provided in request
+            buttonClassVar.on('click', function() {
+                var newVote = $(this).data('vote');
+
+                if(username.toLowerCase() == "anonymoususer"){
+                container.fadeOut(300, function () {
+                    container.load("./login", ".poemContent", function( ) {
+                            container.fadeIn(200);
+                        });
+                    });
+                }
+                else{
+                    if(newVote == vote){
+                        changeVote(0);
+                    }
+                    vote = changeVote(newVote);
+                }
+            })
+        }
+        function markRead() {
+            end = new Date()
+            data = {'poemID': poemID, 'start': start.getTime(), 'end': end.getTime(), 'vote': vote, 'username': username}
+            $.post("./markRead", data);
+            console.log(data);
+            vote = changeVote(0);
+
+        }
+    </script>
+
+{% endblock %}

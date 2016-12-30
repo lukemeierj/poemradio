@@ -1,0 +1,39 @@
+{% extends "poem/base.html" %}
+{% block title %}Submit to PoemRad.io{% endblock %}
+
+{% block poemContent %}
+		<div class = 'row'>
+			<h1 class = "col-md-offset-2 col-md-8">Enter Poem</h1>
+			</div>
+			<div class = "row">
+				<form action="/submit" method = "post">
+				<div class = "col-xs-offset-2 col-xs-8 submit-poem">
+					{% csrf_token %}
+
+					{% for field in form %}
+
+
+					<div class="submit-input">
+						<p>{{ field.label_tag }} {{ field }}</p>
+						
+						{% if form.errors %}
+				            {% for error in field.errors %}
+				            <p class="error-message small">{{ error|escape }}</p>
+				            {% endfor %}
+				        {% endif %}
+				        {% if field.help_text %}
+					        <p class="help">{{ field.help_text|safe }}</p>
+					    {% endif %}
+					</div>
+				
+
+					{% endfor %}
+				
+						<div class = "submit-input row">	
+							<input class="col-xs-offset-5 col-xs-2" type="submit" value="Submit" />
+						</div> 
+					</div>
+				</form>
+			</div>
+
+{% endblock %}

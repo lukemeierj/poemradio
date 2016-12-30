@@ -1,4 +1,5 @@
 poemradio/secretkey
+poemradio/local_settings.py
 *.pyc
 *.csv
 *.sublime*

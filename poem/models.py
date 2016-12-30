@@ -4,6 +4,8 @@ from django.db import models
 from django.utils import timezone
 
 
+
+
 class Poem(models.Model):
     author = models.ForeignKey('poemUser.PoemUser', on_delete=models.CASCADE, default = 1)
     title = models.CharField(max_length=200, default = "")
@@ -18,4 +20,3 @@ class Poem(models.Model):
         return (upvotes-downvotes)/float(sum((upvotes, downvotes, novotes)))
     def __str__(self):
     	return self.title
-    		
