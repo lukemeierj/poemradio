@@ -7,7 +7,7 @@ class SubmitPoemForm(forms.ModelForm):
 		forms.TextInput(attrs={'placeholder': 'title'}))
 	text = forms.CharField(label = "", widget= \
 		forms.Textarea(attrs={'placeholder': 'put your poetry in this box'}))
-	source = forms.CharField(label = "", widget= \
+	source = forms.CharField(label = "", required = False, widget= \
 		forms.TextInput(attrs={'placeholder': 'Source URL'}))
 
 	class Meta:

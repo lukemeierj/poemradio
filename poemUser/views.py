@@ -26,7 +26,8 @@ def showUser(request, username):
         userObj = User.objects.get(username = username.lower())
     except User.DoesNotExist:
         return HttpResponse("User does not exist.")
-    return HttpResponse("User: %s" % (userObj.first_name))
+    return render(request, 'poemUser/profile.html', {'poems': Poem.objects.filter(author = userObj.poemuser)})
+
 
 #Style types: random, squenence, and curated
 def getQueueJSON(request, username = "AnonymousUser", style= "dynamic", n =10):

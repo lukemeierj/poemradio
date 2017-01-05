@@ -3,7 +3,8 @@
 {% block content %}
 
 			<div class = "poem-content" data-pk= {{poem.pk}}>
-				<h1 id="title"><a href = /{{poem.pk}}> {{poem.title}}</a></h1>
+				<h1 class="title"><a href = /{{poem.pk}}>{{poem.title}}</a></h1>
+
 				<p class = "poem-text">{{poem.text}}</p><br>
 				<p class = "vote-btn glyphicon glyphicon-chevron-up upvote" data-vote = "1"></p>
 				<p class = "vote-btn glyphicon glyphicon-chevron-down downvote" data-vote = "-1"></p>
@@ -21,7 +22,6 @@
 		var poemID = {{ poem.pk }},
 		start = new Date(),
 		windowVar = $(window);
-
 		buttonClassVar = $(buttonClass); //Initial queue, provided in request
 		buttonClassVar.on('click', function() {
 				changeVote($(this));

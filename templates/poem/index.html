@@ -2,22 +2,6 @@
 
 {% block title %}PoemRad.io{% endblock %}
 
-
-
-
-{% block navBar %}
-
-	<!-- <div id = "nav" class = "navbar-fixed-bottom"> -->
-<!-- 		<div class = "row" id = "nav">
-			<div class = "text-center">
-				<div class = "text-center vote-btn glyphicon glyphicon-thumbs-down downvote" data-vote = "-1"></div>
-				<div class = "text-center glyphicon glyphicon-triangle-right next"></div>
-				<div class = "text-center vote-btn glyphicon glyphicon-thumbs-up upvote" data-vote = "1"></div>
-			</div>
-			
-		</div> -->
-	<!-- </div> -->
-{% endblock %}
 {% block mainCode %}
 
 <script type="text/javascript">
@@ -74,8 +58,6 @@
 				nextBtn.click(function(e){
 					nextPage();
 				});
-
-
 				$(document).on('keydown', function(e){
 					if(e.which == 39){
 						nextPage();
