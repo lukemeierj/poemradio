@@ -212,11 +212,11 @@ a, a:hover,  a:active, a:visited {
 }
 #next-notif {
   position: fixed;
-  top: 10vh;
+  top: 15vh;
   right: 5em;
   width: 30vw;
   min-width: 20em;
-  height: 80vh;
+  height: 70vh;
   border:6px;
   border-color: rgba(255, 255, 255, .4);
   border-radius: 3px;
