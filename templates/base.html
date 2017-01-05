@@ -1,86 +1,124 @@
-<head>
-    {% load staticfiles %}
-    <script src="{% static './poem/js/jquery.min.js' %}"></script>
-    <link rel="stylesheet" type="text/css" href="{% static './poem/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static './poem/style/main.css' %}">
-    <title>{% block title %} PoemRad.io {% endblock %}</title>
-<script type="text/javascript">
-        function getCookie(name) {
-            var cookieValue = null;
-            if (document.cookie && document.cookie != '') {
-                var cookies = document.cookie.split(';');
-                for (var i = 0; i < cookies.length; i++) {
-                    var cookie = jQuery.trim(cookies[i]);
-                    // Does this cookie string begin with the name we want?
-                    if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Cherry+Swash:400,700|Yeseva+One" rel="stylesheet">
+        {% load staticfiles %}
+        <script src="{% static './poem/js/jquery.min.js' %}"></script>
+        <link rel="stylesheet" type="text/css" href="{% static './poem/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static './poem/style/main.css' %}">
+        <title>{% block title %} PoemRad.io {% endblock %}</title>
+    <script type="text/javascript">
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie != '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = jQuery.trim(cookies[i]);
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
                     }
                 }
+                return cookieValue;
             }
-            return cookieValue;
-        }
-        var csrftoken = getCookie('csrftoken');
-        function csrfSafeMethod(method) {
-        // these HTTP methods do not require CSRF protection
-        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-        }
-        $.ajaxSetup({
-            beforeSend: function(xhr, settings) {
-                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            var csrftoken = getCookie('csrftoken');
+            function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+            }
+            $.ajaxSetup({
+                beforeSend: function(xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
                 }
-            }
-        });
-    </script>
-    
-</head>
-<body>
-
-    <div id = "menu" class = "navbar navbar-fixed-top">
-        <div class = "row">
-            <div class = "col-xs-3 top">
-                <a href="/"><h3>PoemRad.io</h3></a>
-            </div>
-            <div class = "col-xs-3 top">
-                <a href="/submit"><h3>Submit poetry</h3></a>
-            </div>
-            <div class = "col-xs-3 top">
-
-                <a href = "/accounts/signup"><h3>Sign up</h3></a>
-
-            </div>
-            <div class = "col-xs-3 top">
-                {% if user.is_authenticated %}
-
-                <a href = "/accounts/logout"><h3>Log out</h3></a>
-
-                {% else %}
-                <a href = "/accounts/login"><h3>Log in</h3></a>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-    <div class = "frame">
+            });
+        </script>
         
-        <div class = "container col-xs-10 col-xs-offset-1" >
-            {% block content %}
-            <div class = "poemContent" data-pk="-1">
+    </head>
+    <body>
+            <div id = "menu">
+                <div class = "row">
+                    <a href="/"><h3>PoemRad.io</h3></a>
+                </div>
+                <div class = "row async-load">
+                    <a href="/submit"><h3>Submit</h3></a>
+                </div>
+                {% if not user.is_authenticated %}
+                    <div class = "row async-load">
 
-                <h1></h1>
-                <!-- <p>PoemRad.io operates uses Javascript to show you the poems you want to see.  Make sure to <a href = "http://www.enable-javascript.com">enable Javascript.</a>  There have also been bugs using Apple's Safari browser.</p> -->
+                        <a href = "/accounts/signup"><h3>Sign up</h3></a>
 
+                    </div>
+                {% endif %}
+                <div class = "row async-load">
+                    {% if user.is_authenticated %}
+
+                    <a href = "/accounts/logout"><h3>Log out</h3></a>
+
+                    {% else %}
+                    <a href = "/accounts/login"><h3>Log in</h3></a>
+                    {% endif %}
+                </div>
+                <div class = "row async-load">
+
+                    {% block navBar %}
+
+                    {% endblock %}
+                </div>
+                <div class = "bottom-of row async-load">
+                    <a href="/termsandprivacy"><h3 class = "small">Terms & Privacy</h3></a>
+                </div>
             </div>
-            {% endblock %}
-        </div>
-    </div>
-    {% block navBar %}
+            <div id = "main-content" >
+                <div class = "content-container">
+                    {% block content %}
+                    <div class = "poem-content" data-pk="-1">
 
-    {% endblock %}
-    {% block queueCode %}
+                        <h1></h1>
+                        <!-- <p>PoemRad.io operates uses Javascript to show you the poems you want to see.  Make sure to <a href = "http://www.enable-javascript.com">enable Javascript.</a>  There have also been bugs using Apple's Safari browser.</p> -->
 
-    {% endblock %}
-    {% block mainCode %}
-          <!-- Code specific to the page -->
-    {% endblock %}
-</body>
+                    </div>
+                    {% endblock %}
+                </div>
+            </div>
+            <div class = "whitespace-next next">
+                
+            </div>
+            <div id = "next-notif">
+                <p>Click away from the poem or press &#8594; to go to the next piece</p>
+            </div>
+
+        <script type="text/javascript">
+            var menuItems = $("#menu .async-load"),
+            container = $(".content-container");
+            $(window).on('click', function(){
+                // console.log("old", $("#menu").css('background-color'));
+            })
+            menuItems.on('click', function(e){
+                e.preventDefault();
+                var URL = $(this).children().first().attr('href')
+                container.fadeOut(300, function () {
+                    container.load(URL + " .content-container", function( ) {
+                        var color = $("#menu").css('background-color');
+                        $("input, textarea, button").css('background-color', color, 'important');
+                        $("input[type=text], input[type=submit],input[type=password], textarea, button").css('-webkit-box-shadow', "0 0 0px 1000px " + color + " inset");
+
+                        container.fadeIn(200);
+
+                    });
+                });
+            });
+
+        </script>
+        {% block queueCode %}
+
+        {% endblock %}
+        {% block mainCode %}
+              <!-- Code specific to the page -->
+        {% endblock %}
+    </body>
+</html>

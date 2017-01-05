@@ -2,6 +2,7 @@ from .models import PoemUser
 from django.contrib.auth.models import User
 from django import forms
 
+#Old sign in protocol 
 
 # class UserForm(forms.ModelForm):
 #     username = forms.CharField(max_length=30, label = "", widget = forms.TextInput(attrs={'placeholder': 'username'}))
@@ -32,13 +33,13 @@ from django import forms
 # class SubmitPoemForm(forms.ModelForm):
 # 	pass
 
-
-
 class SignupForm(forms.Form):
-    username = forms.CharField(max_length=30, label = '', widget = forms.TextInput(attrs={'placeholder': 'username'}))
-    first_name = forms.CharField(max_length=30, label = "", widget = forms.TextInput(attrs={'placeholder': 'first'}))
-    last_name = forms.CharField(max_length=30, label = "", widget = forms.TextInput(attrs={'placeholder': 'last'}))
-    
+    username = forms.CharField(max_length=30, label = '', widget = \
+        forms.TextInput(attrs={'placeholder': 'username'}))
+    first_name = forms.CharField(max_length=30, label = "", widget = \
+        forms.TextInput(attrs={'placeholder': 'first'}))
+    last_name = forms.CharField(max_length=30, label = "", widget = \
+        forms.TextInput(attrs={'placeholder': 'last'}))
 
     def signup(self, request, user):
         user.first_name = self.cleaned_data['first_name']

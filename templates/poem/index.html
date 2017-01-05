@@ -7,16 +7,16 @@
 
 {% block navBar %}
 
-	<div id = "nav" class = "navbar-fixed-bottom">
-		<div class = "row">
+	<!-- <div id = "nav" class = "navbar-fixed-bottom"> -->
+<!-- 		<div class = "row" id = "nav">
 			<div class = "text-center">
 				<div class = "text-center vote-btn glyphicon glyphicon-thumbs-down downvote" data-vote = "-1"></div>
-				<div class = "text-center glyphicon glyphicon-triangle-right" id = "next"></div>
+				<div class = "text-center glyphicon glyphicon-triangle-right next"></div>
 				<div class = "text-center vote-btn glyphicon glyphicon-thumbs-up upvote" data-vote = "1"></div>
 			</div>
 			
-		</div>
-	</div>
+		</div> -->
+	<!-- </div> -->
 {% endblock %}
 {% block mainCode %}
 
@@ -24,13 +24,15 @@
 	(function(){
 				var queue = {{ queue }},
 				nextQueue = [],
-				queueRequested = false;
+				queueRequested = false,
+            	container = $(".content-container");
+				;
 
 				function nextPage(){
 					markRead();
 					poemID = queue.pop();
-					console.log("current queue:", queue)
-					console.log("next queue:", nextQueue)
+					// console.log("current queue:", queue)
+					// console.log("next queue:", nextQueue)
 
 					if (queue.length == 0) {
 						queue = nextQueue;
@@ -46,7 +48,7 @@
 						} )
 					}
 					container.fadeOut(300, function () {
-						container.load(requestPoem(poemID, ".poemContent"), function( ) {
+						container.load(requestLoad(poemID, ".poem-content"), function( ) {
 										container.fadeIn(300);
 										start = new Date();
 										voteListener(buttonClass);
@@ -54,12 +56,18 @@
 									});
 					})
 				}
+
+				// Begin queue, load first poem
 				container.fadeOut(200, function () {
 								poemID = queue.pop()
-								start = new Date()
-								container.load(requestPoem(poemID, ".poemContent"), function( ) {
+								start = new Date()  //Start timer
+								container.load(requestLoad(poemID, ".poem-content"), function( ) {
+
 										voteListener(buttonClass)
-										container.fadeIn(200);
+										container.fadeIn(200, function(){
+											$('#next-notif').delay(300).fadeIn(500).delay(3000).fadeOut(500);
+										});
+										
 									});
 							});	
 
@@ -67,9 +75,6 @@
 					nextPage();
 				});
 
-
-
-			
 
 				$(document).on('keydown', function(e){
 					if(e.which == 39){

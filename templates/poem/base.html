@@ -2,15 +2,14 @@
 
 {% block queueCode %} 
  <script type="text/javascript">
-        var nextBtn = $('#next'),
+        var nextBtn = $('.next'),
         username = '{{ request.user }}',
-        container = $(".container"),
         vote = 0,
         windowVar = $(window),
         buttonClass = '.vote-btn',
-        poemID = $('.poemContent').data('pk');
-        function requestPoem(poemID, loc) {
-                var baseURL = './';
+        poemID = $('.poem-content').data('pk');
+        function requestLoad(poemID, loc) {
+                var baseURL = '/';
                 return baseURL + poemID + " " + loc;
             }
         function changeVote(vt){
@@ -35,7 +34,7 @@
 
                 if(username.toLowerCase() == "anonymoususer"){
                 container.fadeOut(300, function () {
-                    container.load("./login", ".poemContent", function( ) {
+                    container.load("/accounts/login", ".content", function( ) {
                             container.fadeIn(200);
                         });
                     });

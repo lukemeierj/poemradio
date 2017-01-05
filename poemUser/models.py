@@ -4,28 +4,9 @@ from django.db import models
 from poem.models import Poem
 from django.utils import timezone
 import random
-import json
-#import time
-#from sklearn import (preprocessing, metrics)
 import math
 import operator
-#import numpy as np
 
-
-
-"""
-def popCoefficient(x, k=.5):
-    return (2/np.pi)*np.arctan((np.pi/2)*k*x)
-
-def calcSimilarity(array1, array2, array1TotalInt = None, array2TotalInt = None, k1 = .5):
-    array1 = preprocessing.scale(array1)
-    array2 = preprocessing.scale(array2)
-    similarity_raw = 1/(1+metrics.mean_squared_error(array1, array2))
-    if array1TotalInt and array2TotalInt:
-        similarity = similarity_raw*popCoefficient(5*(len(array1)/array1TotalInt)*(len(array2)/array2TotalInt), k1)
-        return similarity
-    return similarity_raw
-"""
 def dot_product(v1, v2):
     return sum(map(operator.mul, v1, v2))
 def cosSimilarity(v1, v2, standardize = False):
@@ -47,7 +28,6 @@ class PoemUser(models.Model):
     similar = models.ManyToManyField('self', default = [])
     
     #Returns lists in tuple, (selfVotes, foreignVotes)
-
     def getSharedReads(self, foreignPoemUserObj):
         commonPoems = Poem.objects.filter(reads__owner = self).filter(reads__owner = foreignPoemUserObj)
         selfReads = Read.objects.filter(poem__in=commonPoems).filter(owner = self)
@@ -55,13 +35,17 @@ class PoemUser(models.Model):
         return (selfReads, foreignReads)
 
     def getSimilarity(self, foreignPoemUserObj):
+
         selfPoems, foreignPoems = self.getSharedReads(foreignPoemUserObj)
+
         if selfPoems and foreignPoems:
             selfVotes = [poem.vote for poem in selfPoems]
             foreignVotes = [poem.vote for poem in foreignPoems]
             similarity = cosSimilarity(selfVotes, foreignVotes)
             return similarity
-        else: return 0
+        else: 
+            return 0
+
     def nearestNeighbors(self, k = 5):
         neighbors = []
         for poemuser in PoemUser.objects.all():
@@ -79,8 +63,6 @@ class PoemUser(models.Model):
             near = self.nearestNeighbors()
         self.similar.add(*[pair[0] for pair in near])
         self.save()
-
-
 
     def getUnread(self):
         unread = Poem.objects.exclude(reads__owner = self)
@@ -101,7 +83,10 @@ class PoemUser(models.Model):
         if (self.similar.exists()):
             neighbors = self.nearestNeighbors()
             self.updateSimilars(neighbors)
-        neighborlyPoems = Poem.objects.filter(reads__owner__in = self.similar.all()).exclude(reads__owner = self)
+        
+        neighborlyPoems = Poem.objects.filter(
+            reads__owner__in = self.similar.all()).exclude(reads__owner = self)
+
         if(n<=neighborlyPoems.count()):
             randomIndices = random.sample(range(0, neighborlyPoems.count()), n)
             return [neighborlyPoems[i].id for i in randomIndices]
@@ -109,13 +94,12 @@ class PoemUser(models.Model):
             semiNeighborlyPoems = [poem.id for poem in neighborlyPoems]+list(self.getRandomPoems(Poem.objects.all(), n-neighborlyPoems.count()))
             return [poem for poem in semiNeighborlyPoems]
         
-        
-
 
     def __str__(self):
         try:
             return self.user.username
         except User.DoesNotExist: return "Undefined"
+    
     
 class Read(models.Model):
     owner = models.ForeignKey(PoemUser, on_delete=models.CASCADE, related_name = 'reads', blank=True, null=True)
