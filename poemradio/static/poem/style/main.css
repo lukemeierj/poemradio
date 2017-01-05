@@ -1,8 +1,4 @@
-{% load static %}
-@font-face {
-  font-family: Playfair;
-  src: url("{% static './poem/font/PLayfairDisplay-Regular.otf' %}") format("opentype");
-}
+
 p, h1, h2, h3, .glyphicon, input, label  {
 	color: #FCFCFC;
 	white-space: pre-wrap;
@@ -10,7 +6,10 @@ p, h1, h2, h3, .glyphicon, input, label  {
   z-index: 2;
 
 }
-h1, h2 {
+.subject {
+  font-size: 2em;
+}
+h1, h2, .subject {
   /*font-family: 'Lora', serif;*/
   /*font-family: 'Abril Fatface', cursive;*/
   /*font-family: 'Cherry Swash', cursive;*/
@@ -32,10 +31,10 @@ p, input, label {
 h3{
   font-weight: 100;
 }
-h3, p, textarea {
+h3, p {
   font-size: 1.75em;
 }
-textarea {
+textarea, input {
   font-size: 100%;
 }
 .small {
@@ -49,7 +48,7 @@ textarea {
 #menu .bottom-of {
 
   position: fixed;
-  bottom: -.3em;
+  bottom: -.1em;
   left: 7.3em;
 }
 #menu p, h1,h2, .glyphicon {
@@ -64,7 +63,9 @@ textarea {
 .pressed {
   color: #e8713a;
 }
-
+input[type=submit]{
+  text-align: left;
+}
 
 
 .margins{
@@ -74,9 +75,9 @@ textarea {
 input, textarea, button{
   /*width: 35%;*/
   padding-left: .5em;
-  -webkit-border-radius: 30px;
-  -moz-border-radius: 30px;
-  border-radius: 10px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
   background-color: #306953;
   border: none;
   animation: pulseFrame 600s infinite;

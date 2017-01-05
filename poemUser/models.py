@@ -26,6 +26,9 @@ class PoemUser(models.Model):
     safeMode = models.BooleanField(default = False)
     preferences = models.ManyToManyField('tags.Tag', blank=True)
     similar = models.ManyToManyField('self', default = [])
+    agreed_tos = models.BooleanField(default = False)
+    promo_email = models.BooleanField(default = False)
+
     
     #Returns lists in tuple, (selfVotes, foreignVotes)
     def getSharedReads(self, foreignPoemUserObj):

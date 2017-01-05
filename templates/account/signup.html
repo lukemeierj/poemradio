@@ -11,18 +11,27 @@
 
 <form class="signup no-label" id="signup_form" method="post" action="{% url 'account_signup' %}">
     {% csrf_token %}
-    {% for field in form %}
-        {{ field.errors }}
-        {% if field.name == "remember" %}
-        <p class = "small">{{ field.label_tag}} {{field}} </p>
-        {% else %}
-          <p>{{ field }}</p>
-        {% endif %}
-        
-        {% if field.help_text %}
-        <p class="help">{{ field.help_text|safe }}</p>
-        {% endif %}
-    {% endfor %}
+    <p>{{ form.username }} </p>
+    {{ form.username.errors }}
+    <p>{{ form.first_name }} </p>
+    {{ form.first_name.errors }}
+    <p>{{ form.last_name }} </p>
+    {{ form.last_name.errors }}
+    <p>{{ form.email }} </p>
+    {{ form.email.errors }}
+    <p>{{ form.password1 }} </p>
+    {{ form.password1.errors }}
+    <p>{{ form.password2 }} </p>
+    {{ form.password2.errors }}
+    <p class = "small">{{ form.promo.label_tag }} {{form.promo}}</p>
+    {{ form.promo.errors }}
+    <p class = "small">Agree to our <a target = "_blank" href='/termsandprivacy'>Terms of Service and Privacy Policy: {{ form.tos }}</p>
+    {{ form.tos.errors }}
+      
+    {% if field.help_text %}
+    <p class="help">{{ field.help_text|safe }}</p>
+    {% endif %}
+
   <!-- {{ form.as_p }} -->
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
