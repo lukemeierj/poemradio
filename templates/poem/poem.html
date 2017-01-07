@@ -20,18 +20,25 @@
 	(function(){
 		var poemID = {{ poem.pk }},
 		start = new Date(),
-		windowVar = $(window);
+		windowVar = $(window),
+		title = $('.title'),
+		titleFontSize = parseInt(title.css('font-size')),
+		titleSize = title.height();
 		buttonClassVar = $(buttonClass); //Initial queue, provided in request
 		buttonClassVar.on('click', function() {
 				changeVote($(this));
 			});
+		if(titleSize/2 > titleFontSize){
+			title.addClass("two-line-fix");
+		}
+		voteListener(buttonClass)
+
 		windowVar.on('beforeunload', function(){
 		      	console.log('beforeunload');
 		      	end = new Date()
 				data = {'poemID': poemID, 'start': start.getTime(), 'end': end.getTime(), 'vote': vote, 'username': username};
 				$.post("/markRead", data);
-				vote = 0
-		      	//markRead();
+				vote = changeVote(0);
 		});
 
 	})();

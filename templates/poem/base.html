@@ -34,7 +34,7 @@
 
                 if(username.toLowerCase() == "anonymoususer"){
                 container.fadeOut(300, function () {
-                    container.load("/accounts/login", ".content", function( ) {
+                    container.load("/accounts/login?next=/"+poemID, ".content-container", function( ) {
                             container.fadeIn(200);
                         });
                     });
