@@ -1,16 +1,11 @@
 {% extends "poem/base.html" %}
 
 {% block content %}
-
+<h1>{{ thisUser.username }}'s poems</h1>
 {% for poem in poems %}
 
     <div class = "poem-content" data-pk= {{poem.pk}}>
-        {% if poem.title|length > 25 %}
-        <h1 id = "long-title" class="title"><a href = /{{poem.pk}}>{{poem.title}}</a></h1>
-        <h1 id = "short-title" class="title"><a href = /{{poem.pk}}>{{poem.title|slice:":25"}}...</a></h1>
-        {% else %}
-        <h1 class="title"><a href = /{{poem.pk}}>{{poem.title}}</a></h1>
-        {% endif %}
+        <h3 class="title"><a href = /{{poem.pk}}>{{poem.title}}</a></h3>
 
 
         <p class = "poem-text">{{poem.text}}</p><br>

@@ -32,7 +32,7 @@ class PoemUser(models.Model):
     
     #Returns lists in tuple, (selfVotes, foreignVotes)
     def getSharedReads(self, foreignPoemUserObj):
-        commonPoems = Poem.objects.filter(reads__owner = self).filter(reads__owner = foreignPoemUserObj)
+        commonPoems = Poem.objects.filter(reads__owner = self).filter(reads__owner = foreignPoemUserObj).filter(flagged = False)
         selfReads = Read.objects.filter(poem__in=commonPoems).filter(owner = self)
         foreignReads = Read.objects.filter(poem__in=commonPoems).filter(owner = foreignPoemUserObj)
         return (selfReads, foreignReads)
@@ -68,7 +68,7 @@ class PoemUser(models.Model):
         self.save()
 
     def getUnread(self):
-        unread = Poem.objects.exclude(reads__owner = self)
+        unread = Poem.objects.exclude(reads__owner = self).filter(flagged=False)
         return unread
     @classmethod
     #TODO:  OPTIMIZE RANDOM FOR ALL()
@@ -88,7 +88,7 @@ class PoemUser(models.Model):
             self.updateSimilars(neighbors)
         
         neighborlyPoems = Poem.objects.filter(
-            reads__owner__in = self.similar.all()).exclude(reads__owner = self)
+            reads__owner__in = self.similar.all()).exclude(reads__owner = self).filter(flagged = False)
 
         if(n<=neighborlyPoems.count()):
             randomIndices = random.sample(range(0, neighborlyPoems.count()), n)

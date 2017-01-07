@@ -15,12 +15,13 @@ p, h1, h2, h3, .glyphicon, input, label  {
 h1, h2, .subject {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
+  font-weight: 200;
 
 }
-h1{
 
-  margin-left: -7px;
+h1 {
   font-size: 4em;
+  margin-left: -7px;
   max-width: 40vw;
   -ms-word-break: break-word;
   word-break: break-word;
@@ -226,8 +227,10 @@ a, a:hover,  a:active, a:visited {
   position: fixed;
   top: 8em;
   right: 8em;
-  width: 20em;
-  height: 20em;
+  width: 30vmin;
+  height: 70vmin;
+  min-width: 15em;
+  min-height: 15em;
   border:6px;
   border-color: rgba(255, 255, 255, .4);
   border-radius: 3px;

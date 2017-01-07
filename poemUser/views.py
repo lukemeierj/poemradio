@@ -26,7 +26,7 @@ def showUser(request, username):
         userObj = User.objects.get(username = username.lower())
     except User.DoesNotExist:
         return HttpResponse("User does not exist.")
-    return render(request, 'poemUser/profile.html', {'poems': Poem.objects.filter(author = userObj.poemuser)})
+    return render(request, 'poemUser/profile.html', {'poems': Poem.objects.filter(author = userObj.poemuser), 'thisUser': userObj})
 
 
 #Style types: random, squenence, and curated

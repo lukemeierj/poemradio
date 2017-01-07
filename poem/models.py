@@ -14,6 +14,7 @@ class Poem(models.Model):
     source = models.URLField(max_length=200, blank=True, null = True)
     tags = models.ManyToManyField('tags.Tag', default = None, blank = True)
     comments = models.ManyToManyField('Comment', default = None, blank = True, related_name = "comments")
+    flagged = models.BooleanField(default = False)
 
     def getAvgVote(self):
         return (upvotes-downvotes)/float(sum((upvotes, downvotes, novotes)))
