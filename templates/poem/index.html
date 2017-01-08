@@ -49,7 +49,10 @@
 
 										voteListener(buttonClass)
 										container.fadeIn(200, function(){
-											$('#next-notif').delay(300).fadeIn(500).delay(3000).fadeOut(500);
+											// Load next-identifier if mobile size
+											if($("#menu").css('display') != "none"){
+												$('#next-notif').delay(300).fadeIn(500).delay(3000).fadeOut(500);
+											}
 										});
 										
 									});

@@ -7,6 +7,8 @@
 
         {% load staticfiles %}
         <script src="{% static './poem/js/jquery.min.js' %}"></script>
+        <script src="{% static './poem/js/bootstrap.min.js' %}"></script>
+
         <link rel="stylesheet" type="text/css" href="{% static './poem/css/bootstrap.min.css' %}">
         <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:600" rel="stylesheet">
 
@@ -44,6 +46,49 @@
         
     </head>
     <body>
+
+
+
+<nav class="navbar navbar-default">
+  <!-- <div class="container-fluid"> -->
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+            <a class="navbar-brand" href="/"><h3>PoemRad.io</h3></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class = "row nav navbar-nav async-load">
+            <a href="/submit"><h3>SUBMIT</h3></a>
+        </div>
+        {% if not user.is_authenticated %}
+            <div class = "row nav navbar-nav async-load">
+
+                <a href = "/accounts/signup"><h3>SIGN UP</h3></a>
+
+            </div>
+        {% endif %}
+        <div class = "row nav navbar-nav async-load">
+            {% if user.is_authenticated %}
+
+            <a href = "/accounts/logout"><h3>LOGOUT</h3></a>
+
+            {% else %}
+            <a href = "/accounts/login"><h3>LOGIN</h3></a>
+            {% endif %}
+        </div>
+    <div class = "bottom-of row nav navbar-nav async-load">
+        <a href="/termsandprivacy"><h3 class = "small">Terms & Privacy</h3></a>
+    </div>
+    <!-- </div>/.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
             <div id = "menu">
                 <div class = "row">
                     <a href="/"><h3>PoemRad.io</h3></a>
@@ -95,6 +140,12 @@
             <div id = "next-notif">
                 <p>Click away from the poem or press &#8594; to go to the next piece</p>
             </div>
+            <div class = "row voter-bar">
+                <div class = "third"><p class = "vote-btn glyphicon glyphicon-chevron-up upvote" data-vote = "1"></p></div>
+                <div class = "third"><p class = "next">NEXT</p></div>
+                <div class = "third"><p class = "vote-btn glyphicon glyphicon-chevron-down downvote" data-vote = "-1"></p></div>
+            </div>
+
 
         <script type="text/javascript">
             var menuItems = $("#menu .async-load"),

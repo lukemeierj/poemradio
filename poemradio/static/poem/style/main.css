@@ -1,10 +1,8 @@
-
-p, h1, h2, h3, .glyphicon, input, label  {
+p, h1, h2, h3, .glyphicon, input, label {
 	color: #FCFCFC;
 	white-space: pre-wrap;
   position: relative;
   z-index: 2;
-
 }
 .subject {
   font-size: 2em;
@@ -12,19 +10,30 @@ p, h1, h2, h3, .glyphicon, input, label  {
 #long-title {
   display: none;
 }
+.terms {
+  text-align: left;
+  padding: 1em;
+}
 h1, h2, .subject {
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
   font-weight: 200;
-
 }
+
+p, h1,h2, .glyphicon {
+    text-align: center;
+  }
+
+.poem-content p, .poem-content h1, .poem-content h2 {
+    text-align: left;
+    padding-left: 2em;
+  }
+  
 .two-line-fix {
   font-size: 3.15em;
 }
 h1 {
   font-size: 3em;
-  margin-left: -4px;
-  max-width: 40vw;
   -ms-word-break: break-word;
   word-break: break-word;
   -webkit-hyphens: auto;
@@ -37,10 +46,7 @@ p, h3, input, label {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
 }
-.poem-text {
-  max-width: 50vw;
-  word-spacing: 1.2px;
-}
+
 h3{
   font-weight: 100;
 }
@@ -58,28 +64,15 @@ textarea, input {
   text-align: right;
   margin-right: 2em;
 }
-#menu .bottom-of {
-
-  position: fixed;
-  bottom: -.1em;
-  left: 7.3em;
-}
-#menu p, h1,h2, .glyphicon {
-  text-align: left;
-}
-
-.glyphicon-chevron-up {
-  vertical-align: 15px;
-}
 
 
 .pressed {
   color: #e8713a;
 }
-input[type=submit]{
-  text-align: left;
-}
 
+.navbar-brand h3 {
+  margin: 0px;
+}
 
 .margins{
   padding-right: 15em;
@@ -93,45 +86,25 @@ input, textarea, button{
   border-radius: 8px;
   background-color: #306953;
   border: none;
-  animation: pulseFrame 600s infinite;
+  /*animation: pulseFrame 600s infinite;*/
+  animation: pulse 600s infinite;
+
 }
 input:-webkit-autofill, textarea:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px #306953 inset;
     -webkit-text-fill-color: white !important;
     background-clip: content-box;
 }
-/*input:*/
 
-
-::-webkit-input-placeholder { /* Chrome */
-  padding-left: .1em;
-  text-transform: lowercase;
-  color: white;
-
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: white;
 }
-:-ms-input-placeholder { /* IE 10+ */
-  padding-left: .1em;
-
-  color: white;
-  text-transform: lowercase;
-
+.navbar {
+  z-index: 3;
 }
-::-moz-placeholder { /* Firefox 19+ */
-  padding-left: .1em;
 
-  color: white;
-  opacity: 1;
-  text-transform: lowercase;
 
-}
-:-moz-placeholder { /* Firefox 4 - 18 */
-  padding-left: .1em;
-
-  color: white;
-  text-transform: lowercase;
-
-}
-.vote-btn {
+.vote-btn, .next {
   cursor: pointer;
 }
 
@@ -167,17 +140,18 @@ form p {
 .inner-tag-holder {
 	margin: 5px;
 }
-.poem-text {
-	word-wrap: normal;
-}
+
 a, a:hover,  a:active, a:visited {
 	color: inherit;
 	text-decoration: none;
 }
-#menu {
+#menu, .navbar {
   background-color: #C95757;
-  animation: pulseFrame 600s infinite;
-
+  /*animation: pulseFrame 600s infinite;*/
+  animation: pulse 600s infinite;
+}
+.navbar {
+  text-align: center;
 }
 
 .italic {
@@ -187,7 +161,6 @@ a, a:hover,  a:active, a:visited {
   font-weight: 200;
 }
 
-
 #menu {
   padding-top: 6.8em;
   position: fixed;
@@ -195,28 +168,87 @@ a, a:hover,  a:active, a:visited {
   left: 0;
   width: 15em;
   height: 100vh;
-
-
+  display: none;
 }
-#nav {
+.voter-bar {
+  animation: pulse 600s infinite;
   position: fixed;
-  bottom: 2em;
-  left: 2em;
-
+  bottom: 0;
+  min-height: 50px;
+  z-index: 4;
 }
-
-#main-content {
-  padding-top: 2.5em;
-  padding-left: 18em;
+.voter-bar .vote-btn {
   width: 100%;
-
-
+}
+.voter-bar p {
+  padding-top: 15px;
+}
+.third {
+  width: 33.5vw;
+  display: inline-block;
+}
+#main-content {
+  width: 100%;
+  padding-bottom: 50px;
 }
 .poem-text {
+  width: 100%;
+  word-spacing: 1.2px;
+  word-wrap: normal;
   position: relative;
   display: inline-block;
 
 }
+.poem-content .vote-btn {
+  display: none;
+}
+@media only screen and (min-width: 768px) {
+.glyphicon-chevron-up {
+  vertical-align: 15px;
+  }
+.voter-bar {
+    display: none;
+  }
+  .poem-content .vote-btn {
+    display: inline-block;
+  }
+  .poem-text {
+    max-width: 50vw;
+
+  }
+  #menu {
+    display: initial;
+  }
+  #main-content {
+    padding-top: 2.5em;
+    padding-left: 18em;
+
+  }
+  #menu .bottom-of {
+
+    position: fixed;
+    bottom: -.1em;
+    left: 7.3em;
+  }
+  .navbar {
+    display: none;
+  }
+  p, h1,h2, .glyphicon {
+  text-align: left;
+  }
+  h1 {
+    margin-left: -4px;
+    max-width: 40vw;
+  }
+  .terms {
+    font-size: 1em;
+    padding-right: 20em;"
+  }
+}
+.navbar-default .navbar-toggle, .navbar-default, .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+  border: none;
+}
+
 .whitespace-next {
   position:fixed;
   top:0;
@@ -250,7 +282,9 @@ a, a:hover,  a:active, a:visited {
 body {
   background-color: #e86a6a;
 
-  animation: pulse 600s infinite;
+  /*animation: pulse 600s infinite;*/
+  animation: pulseFrame 600s infinite;
+
 }
 
 @keyframes pulse {
@@ -326,4 +360,34 @@ body {
     background-color: #004063;
   }
 }
+/*Make input placeholders white and lowercase*/
+::-webkit-input-placeholder { /* Chrome */
+  padding-left: .1em;
+  text-transform: lowercase;
+  color: white;
+
+}
+:-ms-input-placeholder { /* IE 10+ */
+  padding-left: .1em;
+
+  color: white;
+  text-transform: lowercase;
+
+}
+::-moz-placeholder { /* Firefox 19+ */
+  padding-left: .1em;
+
+  color: white;
+  opacity: 1;
+  text-transform: lowercase;
+
+}
+:-moz-placeholder { /* Firefox 4 - 18 */
+  padding-left: .1em;
+
+  color: white;
+  text-transform: lowercase;
+
+}
+/*End white/lowercase placeholders */
 

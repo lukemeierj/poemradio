@@ -1,5 +1,5 @@
 all caps menu spaced more
-date/votes cut off for longer poems
 .fix safari
 .? fix issue where you lose a poem if you aren't signed in
 create safemode
+mobile
