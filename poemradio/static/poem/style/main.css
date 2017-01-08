@@ -29,11 +29,9 @@ p, h1,h2, .glyphicon {
     padding-left: 2em;
   }
   
-.two-line-fix {
-  font-size: 3.15em;
-}
+
 h1 {
-  font-size: 3em;
+  font-size: 2em;
   -ms-word-break: break-word;
   word-break: break-word;
   -webkit-hyphens: auto;
@@ -51,7 +49,7 @@ h3{
   font-weight: 100;
 }
 h3, p {
-  font-size: 1.3em;
+  font-size: .9em;
 }
 textarea, input {
   font-size: 100%;
@@ -184,7 +182,7 @@ a, a:hover,  a:active, a:visited {
   padding-top: 15px;
 }
 .third {
-  width: 33.5vw;
+  width: 34vw;
   display: inline-block;
 }
 #main-content {
@@ -203,10 +201,19 @@ a, a:hover,  a:active, a:visited {
   display: none;
 }
 @media only screen and (min-width: 768px) {
-.glyphicon-chevron-up {
-  vertical-align: 15px;
+  h3, p {
+    font-size: 1.3em;
   }
-.voter-bar {
+  .two-line-fix {
+     font-size: 3.15em;
+  }
+  .glyphicon-chevron-up {
+    vertical-align: 15px;
+  }
+  h1 {
+    font-size: 3em;
+  }
+  .voter-bar {
     display: none;
   }
   .poem-content .vote-btn {
