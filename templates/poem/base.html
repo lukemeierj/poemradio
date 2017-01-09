@@ -29,7 +29,8 @@
         }
         function voteListener(buttonClass) {
             buttonClassVar = $(buttonClass); //Initial queue, provided in request
-            buttonClassVar.on('click', function() {
+            buttonClassVar.on('click', function(e) {
+                e.preventDefault();
                 var newVote = $(this).data('vote');
 
                 if(username.toLowerCase() == "anonymoususer"){

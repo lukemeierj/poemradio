@@ -15,8 +15,13 @@ from django.utils import timezone
 @require_safe
 def showPoem(request, poemID):
     poemObj  = get_object_or_404(Poem, pk=poemID)
+    try:
+        vote = Read.objects.filter(poem_id=poemID).filter(owner=request.user.poemuser).get().vote;
+    except (Read.DoesNotExist, AttributeError) as e:
+        vote = 0;
     context  = {
         'poem': poemObj,
+        'vote': vote,
     }
 
     return render(request, 'poem/poem.html', context)

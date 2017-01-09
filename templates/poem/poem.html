@@ -5,9 +5,9 @@
 			<div class = "poem-content" data-pk= {{poem.pk}}>
 				<h1 class="title"><a href = /{{poem.pk}}>{{poem.title}}</a></h1>
 
-				<p class = "poem-text">{{poem.text}}</p><br>
+				<p class = "poem-text">{{poem.text}}</p>
 				<p class = "vote-btn glyphicon glyphicon-chevron-up upvote" data-vote = "1"></p>
-				<p class = "vote-btn glyphicon glyphicon-chevron-down downvote" data-vote = "-1"></p>
+				<p class = "vote-btn glyphicon glyphicon-chevron-down downvote next" data-vote = "-1"></p>
 				<a href = "..{% url 'user:showUser' poem.author.user.username %}" class = "poem-author"><p class = "small">{{poem.author.user.username}}</p></a>
 				<!-- <p class = "small">Down: <span id="downvotes"> {{poem.downvotes}} </span> - Up: <span id="upvotes">{{poem.upvotes}} </span></p> -->
 			</div>
@@ -24,10 +24,8 @@
 		title = $('.title'),
 		titleFontSize = parseInt(title.css('font-size')),
 		titleSize = title.height();
-		buttonClassVar = $(buttonClass); //Initial queue, provided in request
-		buttonClassVar.on('click', function() {
-				changeVote($(this));
-			});
+		prevVote = {{ vote }}; //Initial queue, provided in request
+		changeVote(prevVote);
 		if(titleSize/2 > titleFontSize){
 			title.addClass("two-line-fix");
 		}

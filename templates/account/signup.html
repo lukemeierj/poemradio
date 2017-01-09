@@ -23,6 +23,8 @@
     {{ form.password1.errors }}
     <p>{{ form.password2 }} </p>
     {{ form.password2.errors }}
+    <p class = "small">{{ form.safeMode.label_tag }} {{form.safeMode}}</p>
+    {{ form.safeMode.errors }}
     <p class = "small">{{ form.promo.label_tag }} {{form.promo}}</p>
     {{ form.promo.errors }}
     <p class = "small">Agree to our <a target = "_blank" href='/termsandprivacy'>Terms of Service and Privacy Policy</a>: {{ form.tos }}</p>

@@ -3,6 +3,10 @@ p, h1, h2, h3, .glyphicon, input, label {
 	white-space: pre-wrap;
   position: relative;
   z-index: 2;
+  text-shadow: 0 0 0.2px #3a3a3a;
+}
+#main-content {
+  padding-left: 3em;
 }
 .subject {
   font-size: 2em;
@@ -26,7 +30,6 @@ p, h1,h2, .glyphicon {
 
 .poem-content p, .poem-content h1, .poem-content h2 {
     text-align: left;
-    padding-left: 2em;
   }
   
 
@@ -48,14 +51,11 @@ p, h3, input, label {
 h3{
   font-weight: 100;
 }
-h3, p {
-  font-size: .9em;
+h3, p, .small {
+  font-size: 1em;
 }
 textarea, input {
   font-size: 100%;
-}
-.small {
-  font-size: 1em;
 }
 
 #menu  h3 {
@@ -170,9 +170,6 @@ a, a:hover,  a:active, a:visited {
 }
 .voter-bar {
   animation: pulse 600s infinite;
-  position: fixed;
-  bottom: 0;
-  min-height: 50px;
   z-index: 4;
 }
 .voter-bar .vote-btn {
@@ -181,10 +178,7 @@ a, a:hover,  a:active, a:visited {
 .voter-bar p {
   padding-top: 15px;
 }
-.third {
-  width: 34vw;
-  display: inline-block;
-}
+
 #main-content {
   width: 100%;
   padding-bottom: 50px;
@@ -194,7 +188,7 @@ a, a:hover,  a:active, a:visited {
   word-spacing: 1.2px;
   word-wrap: normal;
   position: relative;
-  display: inline-block;
+  display: table;
 
 }
 .poem-content .vote-btn {
@@ -220,7 +214,8 @@ a, a:hover,  a:active, a:visited {
     display: inline-block;
   }
   .poem-text {
-    max-width: 50vw;
+    width: auto;
+    max-width: 60vw;
 
   }
   #menu {
@@ -228,7 +223,7 @@ a, a:hover,  a:active, a:visited {
   }
   #main-content {
     padding-top: 2.5em;
-    padding-left: 18em;
+    padding-left: 19em;
 
   }
   #menu .bottom-of {

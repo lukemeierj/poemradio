@@ -52,8 +52,6 @@
 
 
 <nav class="navbar navbar-default">
-  <!-- <div class="container-fluid"> -->
-    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
@@ -88,8 +86,8 @@
     <div class = "bottom-of row nav navbar-nav async-load">
         <a href="/termsandprivacy"><h3 class = "small">Terms & Privacy</h3></a>
     </div>
-    <!-- </div>/.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+
+  </div>
 </nav>
             <div id = "menu">
                 <div class = "row">
@@ -136,18 +134,15 @@
                     {% endblock %}
                 </div>
             </div>
-            <div class = "whitespace-next next">
+            <a href="/"><div class = "whitespace-next next">
                 
-            </div>
+            </div></a>
             <div id = "next-notif">
                 <p>Click away from the poem or press &#8594; to go to the next piece</p>
             </div>
-            <div class = "row voter-bar">
-                <div class = "third"><p class = "vote-btn glyphicon glyphicon-chevron-up upvote" data-vote = "1"></p></div>
-                <div class = "third"><p class = "next">NEXT</p></div>
-                <div class = "third"><p class = "vote-btn glyphicon glyphicon-chevron-down downvote" data-vote = "-1"></p></div>
-            </div>
+            {% block mobileNav %}
 
+            {% endblock %}
 
         <script type="text/javascript">
             var menuItems = $("#menu .async-load"),

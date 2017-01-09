@@ -69,6 +69,8 @@ class PoemUser(models.Model):
 
     def getUnread(self):
         unread = Poem.objects.exclude(reads__owner = self).filter(flagged=False)
+        if(self.safeMode):
+            unread = unread.filter(profane = False)
         return unread
     @classmethod
     #TODO:  OPTIMIZE RANDOM FOR ALL()
@@ -88,7 +90,9 @@ class PoemUser(models.Model):
             self.updateSimilars(neighbors)
         
         neighborlyPoems = Poem.objects.filter(
-            reads__owner__in = self.similar.all()).exclude(reads__owner = self).filter(flagged = False)
+            reads__owner__in = self.similar.all()).exclude(reads__vote=-1).exclude(reads__owner = self).exclude(flagged = True)
+        if(self.safeMode):
+            neighborlyPoems = neighborlyPoems.filter(profane=False)
 
         if(n<=neighborlyPoems.count()):
             randomIndices = random.sample(range(0, neighborlyPoems.count()), n)
