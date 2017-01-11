@@ -10,7 +10,7 @@ p, h1, h2, input, label, .glyphicon {
 }
 
 .poem-content {
-  /*padding-left: 3em;*/
+  padding-left: 3em;
 }
 .subject {
   font-size: 2em;
@@ -258,6 +258,10 @@ a, a:hover,  a:active, a:visited {
   #ck-button label {
     padding-left: .5em;
   }
+  .poem-content {
+    padding-left: 0;
+  }
+
 }
 .navbar-default .navbar-toggle, .navbar-default, .navbar-default .navbar-collapse, .navbar-default .navbar-form {
   border: none;
