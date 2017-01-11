@@ -1,11 +1,10 @@
 {% extends "poem/base.html" %}
 
 {% block content %}
-
+			{% load poem_extras %}
 			<div class = "poem-content" data-pk= {{poem.pk}}>
-				<h1 class="title"><a href = /{{poem.pk}}>{{poem.title}}</a></h1>
-
-				<p class = "poem-text">{{poem.text}}</p>
+				<h1 class="title" {% if poem.centered %} style = "text-align: center" {%endif%} ><a href = /{{poem.pk}}>{{poem.title}}</a></h1>
+				<p class = "poem-text" {% if poem.centered %} style = "text-align: center" {%endif%}>{{poem.text|markdown}}</p>
 				<p class = "vote-btn glyphicon glyphicon-chevron-up upvote" data-vote = "1"></p>
 				<p class = "vote-btn glyphicon glyphicon-chevron-down downvote next" data-vote = "-1"></p>
 				<a href = "..{% url 'user:showUser' poem.author.user.username %}" class = "poem-author"><p class = "small">{{poem.author.user.username}}</p></a>

@@ -3,10 +3,14 @@ p, h1, h2, h3, .glyphicon, input, label {
 	white-space: pre-wrap;
   position: relative;
   z-index: 2;
-  text-shadow: 0 0 0.2px #3a3a3a;
 }
-#main-content {
-  padding-left: 3em;
+p, h1, h2, input, label, .glyphicon {
+  text-shadow: 0 0 0.2px #3a3a3a;
+
+}
+
+.poem-content {
+  /*padding-left: 3em;*/
 }
 .subject {
   font-size: 2em;
@@ -84,8 +88,7 @@ input, textarea, button{
   border-radius: 8px;
   background-color: #306953;
   border: none;
-  /*animation: pulseFrame 600s infinite;*/
-  animation: pulse 600s infinite;
+  animation: pulseFrame 400s infinite;
 
 }
 input:-webkit-autofill, textarea:-webkit-autofill {
@@ -145,8 +148,7 @@ a, a:hover,  a:active, a:visited {
 }
 #menu, .navbar {
   background-color: #C95757;
-  /*animation: pulseFrame 600s infinite;*/
-  animation: pulse 600s infinite;
+  animation: pulseFrame 400s infinite;
 }
 .navbar {
   text-align: center;
@@ -154,6 +156,9 @@ a, a:hover,  a:active, a:visited {
 
 .italic {
   font-style: italic;
+}
+.bold {
+  font-weight: 900;
 }
 .thin {
   font-weight: 200;
@@ -169,7 +174,7 @@ a, a:hover,  a:active, a:visited {
   display: none;
 }
 .voter-bar {
-  animation: pulse 600s infinite;
+  animation: pulseFrame 400s infinite;
   z-index: 4;
 }
 .voter-bar .vote-btn {
@@ -191,10 +196,14 @@ a, a:hover,  a:active, a:visited {
   display: table;
 
 }
+
 .poem-content .vote-btn {
   display: none;
 }
 @media only screen and (min-width: 768px) {
+  .content-container div {
+    display: table;
+  }
   h3, p {
     font-size: 1.3em;
   }
@@ -235,7 +244,7 @@ a, a:hover,  a:active, a:visited {
   .navbar {
     display: none;
   }
-  p, h1,h2, .glyphicon {
+  p, h1,h2, .glyphicon, input, textarea {
   text-align: left;
   }
   h1 {
@@ -246,16 +255,19 @@ a, a:hover,  a:active, a:visited {
     font-size: 1em;
     padding-right: 20em;"
   }
+  #ck-button label {
+    padding-left: .5em;
+  }
 }
 .navbar-default .navbar-toggle, .navbar-default, .navbar-default .navbar-collapse, .navbar-default .navbar-form {
   border: none;
 }
 
 .whitespace-next {
-  position:fixed;
-  top:0;
-  left:5em;
-  width:100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 50vw;
   height: 100%;
   margin-left: 15em;
 }
@@ -283,83 +295,81 @@ a, a:hover,  a:active, a:visited {
 
 body {
   background-color: #e86a6a;
-
-  /*animation: pulse 600s infinite;*/
-  animation: pulseFrame 600s infinite;
-
+  animation: pulse 400s infinite;
 }
 
 @keyframes pulse {
   0% {
-    background-color: #2a5b48;
+    background-color: #756F8F;
   }
   10% {
-    background-color: #63b7a8;
+    background-color: #306953;
   }
   20% {
-    background-color: #871451;
+    background-color: #e86a6a;
+    
   }
   30% {
-    background-color: #e86a6a;
+    background-color: #509B92;
   }
   40% {
-    background-color: #556d8c;
+    background-color: #bc6464;
   }
   50% {
-    background-color: #5392c5;
+    background-color: #3AA5A0;
   }
   60% {
-    background-color: #562656;
+    background-color: #637199;
   }
   70% {
-    background-color: #e86a6a;
+    background-color: #689681;
   }
   80% {
-    background-color: #556d8c;
+    background-color: #3fada8;
   }
   90% {
-    background-color: #001F3F;
+    background-color: #a07590;
   }
 
   100% {
-    background-color: #001F3F;
+    background-color: #756F8F;
   }
 }
 
 @keyframes pulseFrame {
   0% {
-    background-color: #306953;
+    background-color: #556d8c;
   }
   10% {
-    background-color: #38B7A8;
+    background-color: #2a5b48;
   }
   20% {
-    background-color: #660F3D;
-  }
-  30% {
     background-color: #C95757;
   }
+  30% {
+    background-color: #2F7068
+  }
   40% {
-    background-color: #7DA1CF;
+    background-color: #556270;
   }
   50% {
-    background-color: #7879A3;
+    background-color: #1F7A76;
   }
   60% {
-    background-color: #7D377D;
+    background-color: #76648c;
   }
   70% {
-    background-color: #E1525A;
+    background-color: #3E755C;
   }
   80% {
-    background-color: #ADA5D4;
+    background-color: #808080;
   }
   90% {
-    background-color: #2C3061;
+    background-color: #844e70;
   }
 
   100% {
-    background-color: #004063;
+    background-color: #556d8c;
   }
 }
 /*Make input placeholders white and lowercase*/
@@ -392,4 +402,47 @@ body {
 
 }
 /*End white/lowercase placeholders */
+/* The switch - the box around the slider */
 
+#ck-button label {
+  white-space: normal;
+  /*float:left;*/
+  width:5.5em;
+  height: 1.5em;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  background-color: #306953;
+  border: none;
+  animation: pulseFrame 400s infinite;
+  -webkit-transition: opacity .3s; /* Safari */
+  transition: opacity .3s ease;
+}
+#ck-button label:hover {
+  opacity: 0.8;
+}
+
+#ck-button label span {
+  -webkit-user-select: none; /* Chrome/Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+
+  /* Rules below not implemented in browsers yet */
+  -o-user-select: none;
+  user-select: none;
+  padding-top: .3em;
+}
+
+#ck-button label input {
+    position:fixed;
+    top:-20px;
+    opacity: 0;
+}
+#ck-button input:checked + span {
+  opacity: .5;
+}
+.markdown-note {
+    letter-spacing: .5px;
+    margin-top: -2em;
+
+  }

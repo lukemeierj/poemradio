@@ -27,7 +27,7 @@
     {{ form.safeMode.errors }}
     <p class = "small">{{ form.promo.label_tag }} {{form.promo}}</p>
     {{ form.promo.errors }}
-    <p class = "small">Agree to our <a target = "_blank" href='/termsandprivacy'>Terms of Service and Privacy Policy</a>: {{ form.tos }}</p>
+    <p class = "small"><label>Agree to our <a target = "_blank" href='/termsandprivacy'>Terms of Service and Privacy Policy</label></a>: {{ form.tos }}</p>
     {{ form.tos.errors }}
       
     {% if field.help_text %}

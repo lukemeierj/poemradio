@@ -13,7 +13,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1','.poemrad.io']
 
 
 INSTALLED_APPS = [
-
+    'poem.apps.PoemConfig',
     'django.contrib.sites',
     'anymail',
     'allauth',
@@ -23,7 +23,6 @@ INSTALLED_APPS = [
     # 'allauth.socialaccount.providers.facebook',
     # 'allauth.socialaccount.providers.google',
     'poemUser.apps.PoemuserConfig',
-    'poem.apps.PoemConfig',
     'tags.apps.TagsConfig',
     'django.contrib.admin',
     'django.contrib.auth',

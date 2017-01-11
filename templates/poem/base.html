@@ -52,7 +52,6 @@
             end = new Date()
             data = {'poemID': poemID, 'start': start.getTime(), 'end': end.getTime(), 'vote': vote, 'username': username}
             $.post("./markRead", data);
-            console.log(data);
             vote = changeVote(0);
 
         }

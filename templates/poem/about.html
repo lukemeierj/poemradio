@@ -1,0 +1,36 @@
+{% extends "poem/base.html" %}
+
+{% block content %}
+
+<h1>About</h1>
+
+<h3>Why Does This Exist</h3>
+
+<p class='terms'>Welcome to PoemRad.io!  I built this website to help amateur poets showcase their work somewhere that makes it easy for poetry lovers to sit back and enjoy what they read.  I've visited other websites that host amateur poetry, but they have so much content and it's overwhelming.  I don't want the quantity of poetry in the world to make any single poem seem less valuable, so we just show you one poem at a time.  
+
+No ads.  No popups.  No sidebar suggestions.  <span class= 'bold'>Just follow the queue.</span></p>
+<h3>What Makes This Special</h3>
+<p class='terms'>Further, we take into account your taste in poetry.  Whenever you dislike or like a poem, we take notice and will cater your future queue to your specific taste, like Pandora with songs, Amazon with products, or Facebook with your friends' cat photos.
+</p>
+<h3>In Development</h3>
+<p class='terms'>I'm a college student.  You can thank summer and winter break for this existing.  There are so many features I wish I could get up and running, but it'll take time.  If you'd like to request a feature, email me at <a href="mailto:peomradioapp@gmail.com">poemradioapp@gmail.com</a>.  
+        For now, I'm working on:
+            Editing and deleting poems from user end 
+            Allow users to comment on poetry
+            Allow users to edit their profile from the site</p>
+<h3>Donate</h3>
+<p class='terms'>I'm not running adds or letting users sponsor posts.  I'm taking a net loss on this project right now, because I think something like this needs to exist.  If you have some extra money, I would greatly appreciate the subsidy.  If not, spread the word about the site!  More than anything else, I want this to get used.
+
+Anyway, I hate myself for asking for donations, but here it goes (p.s., my name is Luke Meier).
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+    <input type="hidden" name="cmd" value="_s-xclick">
+    <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+    ">
+    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+    </form>
+</p>
+<h3>Contact Us</h3>
+<p class='terms'>If you need to contact me about the website, email me at <a href="mailto:peomradioapp@gmail.com">poemradioapp@gmail.com</a>.  If you want to reach out professionally, shoot me an email at <a href="mailto:lukemeierj@gmail.com">lukemeierj@gmail.com</a>, or send me a message on <a href ='https://www.linkedin.com/in/lukemeierj'>LinkedIn</a>.
+
+{% endblock %}

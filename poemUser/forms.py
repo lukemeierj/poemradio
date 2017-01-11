@@ -43,7 +43,7 @@ class SignupForm(forms.Form):
         forms.TextInput(attrs={'placeholder': 'last'}))
     safeMode = forms.BooleanField(label = "SafeMode (limit profanity)", required=False)
     tos = forms.BooleanField(label = "Agree to Privacy Policy and our Terms of Service", required=True)
-    promo = forms.BooleanField(label = "Let us send you nifty emails once and a while", required = False)
+    promo = forms.BooleanField(label = "Let us send you nifty emails once and a while", required = False, initial = True)
 
 
     def signup(self, request, user):

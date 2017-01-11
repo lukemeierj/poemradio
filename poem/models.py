@@ -14,6 +14,7 @@ class Poem(models.Model):
     creation = models.DateTimeField('date published', default = timezone.now, blank = True)
     source = models.URLField(max_length=200, blank=True, null = True)
     tags = models.ManyToManyField('tags.Tag', default = None, blank = True)
+    centered = models.BooleanField(default = False)
     comments = models.ManyToManyField('Comment', default = None, blank = True, related_name = "comments")
     flagged = models.BooleanField(default = False)
     profane = models.BooleanField(default = False)

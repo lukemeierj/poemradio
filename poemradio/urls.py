@@ -12,6 +12,7 @@ urlpatterns = [
     # url(r'^login/?$', poemUser.views.user_login, name='login'),
     # url(r'^logout/?$', poemUser.views.user_logout, name='logout'),
     url(r'^termsandprivacy', TemplateView.as_view(template_name='poem/termsandprivacy.html')),
+    url(r'^about', TemplateView.as_view(template_name='poem/about.html')),
     url(r'^admin/', admin.site.urls),
     url(r'^user/', include('poemUser.urls', namespace = "user")),
     url(r'^accounts/', include('allauth.urls')),

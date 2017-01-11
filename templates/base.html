@@ -4,8 +4,8 @@
         <meta name="viewport" content="width=device-width,initial-scale=1">
 
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i" rel="stylesheet">
 
-        <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400" rel="stylesheet">
 
         {% load staticfiles %}
         <script src="{% static './poem/js/jquery.min.js' %}"></script>
@@ -83,6 +83,9 @@
             <a href = "/accounts/login"><h3>LOGIN</h3></a>
             {% endif %}
         </div>
+        <div class = "row nav navbar-nav async-load">
+            <a href="/about"><h3>ABOUT</h3></a>
+        </div>
     <div class = "bottom-of row nav navbar-nav async-load">
         <a href="/termsandprivacy"><h3 class = "small">Terms & Privacy</h3></a>
     </div>
@@ -117,6 +120,9 @@
                     {% block navBar %}
 
                     {% endblock %}
+                </div>
+                <div class = "row async-load">
+                    <a href="/about"><h3>ABOUT</h3></a>
                 </div>
                 <div class = "bottom-of row async-load">
                     <a href="/termsandprivacy"><h3 class = "small">Terms & Privacy</h3></a>
@@ -157,14 +163,21 @@
                     container.load(URL + " .content-container", function( ) {
                         var color = $("#menu").css('background-color');
                         $("input, textarea, button").css('background-color', color, 'important');
-                        $("input[type=text], input[type=submit], input[type=email],input[type=password], textarea, button").css('-webkit-box-shadow', "0 0 0px 1000px " + color + " inset");
-
+                        $("input[type=text], #ck-button label, input[type=submit], input[type=email],input[type=password], textarea, button").css('-webkit-box-shadow', "0 0 0px 1000px " + color + " inset");
                         container.fadeIn(200);
-
+                        var textarea = $('textarea'),
+                        alignBtn = $('#ck-button input');
+                        alignBtn.on('change', function(e){
+                            if(textarea.css('text-align') != 'center'){
+                                textarea.css('text-align', 'center');
+                            }
+                            else{
+                                textarea.css('text-align', 'left');
+                            }
+                        })                      
                     });
                 });
             });
-
         </script>
         {% block queueCode %}
 
