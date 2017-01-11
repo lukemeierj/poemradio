@@ -23,6 +23,17 @@
 						<p><input type="submit" value="submit" /></p>
 				</form>
 			</div>
-			
+			<script type="text/javascript">
+                var textarea = $('textarea'),
+                alignBtn = $('#ck-button input');
+                alignBtn.on('change', function(e){
+                    if(textarea.css('text-align') != 'center'){
+                        textarea.css('text-align', 'center');
+                    }
+                    else{
+                        textarea.css('text-align', 'left');
+                    }
+                })  
+			</script>
 
 {% endblock %}

@@ -11,6 +11,7 @@ p, h1, h2, input, label, .glyphicon {
 
 .poem-content {
   padding-left: 3em;
+  padding-right: 3em;
 }
 .subject {
   font-size: 2em;
