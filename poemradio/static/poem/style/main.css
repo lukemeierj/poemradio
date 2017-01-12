@@ -271,7 +271,7 @@ a, a:hover,  a:active, a:visited {
 .whitespace-next {
   position: fixed;
   top: 0;
-  right: 0;
+  left: 25em;
   width: 50vw;
   height: 100%;
   margin-left: 15em;
@@ -412,7 +412,7 @@ body {
 #ck-button label {
   white-space: normal;
   /*float:left;*/
-  width:5.5em;
+  width:3.8em;
   height: 1.5em;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
@@ -451,3 +451,6 @@ body {
     margin-top: -2em;
 
   }
+.poem-text  a, .terms a {
+  text-decoration: underline;
+} 
