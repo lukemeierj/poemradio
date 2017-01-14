@@ -25,6 +25,7 @@
 		titleSize = title.height();
 		prevVote = {{ vote }}; //Initial queue, provided in request
 		changeVote(prevVote);
+		vote = prevVote;
 		if(titleSize/2 > titleFontSize){
 			title.addClass("two-line-fix");
 		}

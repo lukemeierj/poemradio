@@ -1,3 +1,7 @@
-fix large monitor click zone being too far to the right
-.fix safari
-.? fix issue where you lose a poem if you aren't signed in
+    .fix safari
+    .? fix issue where you lose a poem if you aren't signed in
+
+keep next out of main content area without losing right edge
+make profile page
+edit poems
+delete account

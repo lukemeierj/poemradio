@@ -3,8 +3,7 @@
     <head>
         <meta name="viewport" content="width=device-width,initial-scale=1">
 
-        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700,700i" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,400,400i,700,700i" rel="stylesheet">
 
 
         {% load staticfiles %}
@@ -64,9 +63,6 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <div class = "row nav navbar-nav async-load">
-            <a href="/submit"><h3>SUBMIT</h3></a>
-        </div>
         {% if not user.is_authenticated %}
             <div class = "row nav navbar-nav async-load">
 
@@ -74,6 +70,10 @@
 
             </div>
         {% endif %}
+        <div class = "row nav navbar-nav async-load">
+            <a href="/submit"><h3>SUBMIT</h3></a>
+        </div>
+        
         <div class = "row nav navbar-nav async-load">
             {% if user.is_authenticated %}
 
@@ -96,9 +96,6 @@
                 <div class = "row">
                     <a href="/"><h3>PoemRad.io</h3></a>
                 </div>
-                <div class = "row async-load">
-                    <a href="/submit"><h3>SUBMIT</h3></a>
-                </div>
                 {% if not user.is_authenticated %}
                     <div class = "row async-load">
 
@@ -106,6 +103,10 @@
 
                     </div>
                 {% endif %}
+                <div class = "row async-load">
+                    <a href="/submit"><h3>SUBMIT</h3></a>
+                </div>
+
                 <div class = "row async-load">
                     {% if user.is_authenticated %}
 

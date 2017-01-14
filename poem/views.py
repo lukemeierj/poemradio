@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_safe
 from django.contrib.auth.models import User
 from poemUser.models import PoemUser, Read
+from allauth.account.models import EmailAddress
 from django.utils import timezone
 
 
@@ -39,9 +40,9 @@ def jsonPoem(request, poemID):
             if (key != "_state"):
                 json[key] = iterable[key]
         tempList = []
-        for tag in poemObj.tags.all():
-            tempList.append(tag.id)
-        json["tags"] = tempList
+        # for tag in poemObj.tags.all():
+        #     tempList.append(tag.id)
+        # json["tags"] = tempList
     else: json["error"] = True
     response = JsonResponse(json)
     return response
@@ -58,7 +59,10 @@ def submit(request):
 
     else:
         form = SubmitPoemForm()
-    return render(request, 'poem/submit.html', {'form': form})
+    verified = EmailAddress.objects.filter(user=request.user, verified=True).exists()
+    if not verified:
+        return HttpResponseRedirect("/accounts/email/?next=/submit") 
+    return render(request, 'poem/submit.html', {'form': form, 'verified': verified })
 
     
 

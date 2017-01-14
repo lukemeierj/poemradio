@@ -3,6 +3,9 @@ import datetime
 from django.db import models
 from django.utils import timezone
 from poemradio import profanities
+from tagging.registry import register
+from tagging.fields import TagField
+
 
 class Poem(models.Model):
     author = models.ForeignKey('poemUser.PoemUser', on_delete=models.CASCADE, default = 1)
@@ -13,23 +16,27 @@ class Poem(models.Model):
     downvotes = models.IntegerField(default = 0)
     creation = models.DateTimeField('date published', default = timezone.now, blank = True)
     source = models.URLField(max_length=200, blank=True, null = True)
-    tags = models.ManyToManyField('tags.Tag', default = None, blank = True)
     centered = models.BooleanField(default = False)
     comments = models.ManyToManyField('Comment', default = None, blank = True, related_name = "comments")
     flagged = models.BooleanField(default = False)
     profane = models.BooleanField(default = False)
+    tags = TagField()
 
 
     def getAvgVote(self):
         return (upvotes-downvotes)/float(sum((upvotes, downvotes, novotes)))
-    def setProfanity(self):
-        splitWords = self.text.split()
+    def getProfanity(self):
+        splitWords = self.text.split() + self.title.split()
         if set(profanities.PROFANITIES).intersection(splitWords) or 'fuck' in splitWords:
             self.profane = True
-        self.save()
         return self.profane
     def __str__(self):
     	return self.title
+
+    def save(self, *args, **kwargs):
+        self.profane = self.getProfanity()
+        super(Poem, self).save(*args, **kwargs)
+
 
 
 class Comment(models.Model):

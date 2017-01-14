@@ -1,6 +1,5 @@
 import os
 import dj_database_url
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ROOT_URLCONF = 'poemradio.urls'
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -13,6 +12,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1','.poemrad.io']
 
 
 INSTALLED_APPS = [
+    'tagging',
     'poem.apps.PoemConfig',
     'django.contrib.sites',
     'anymail',
@@ -31,6 +31,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+FORCE_LOWERCASE_TAGS = True
 
 #Site ID in database is pk=3, "poemrad.io"
 SITE_ID = 3
@@ -148,18 +150,24 @@ STATICFILES_DIRS = (
 )
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-
+# POSTMARK_SENDER      = 'sender@poemrad.io'
+POSTMARK_TEST_MODE   = False
+POSTMARK_TRACK_OPENS = True
 #Email
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'postmark.django_backend.EmailBackend'
 
-EMAIL_BACKEND = "anymail.backends.mailgun.MailgunBackend"  
+# EMAIL_BACKEND = "anymail.backends.mailgun.MailgunBackend"  
 DEFAULT_FROM_EMAIL = "Little PoemRad.io Robot <lilrobot@poemrad.io>"  
 
 #Load env key only if no local settings
 try:
     from .local_settings import *
 except ImportError as e:
-    ANYMAIL = {
-        "MAILGUN_API_KEY": os.environ['MAILGUN_API_KEY'],
-        "MAILGUN_SENDER_DOMAIN": 'mg.poemrad.io',  
-    }
+    # ANYMAIL = {
+    #     "MAILGUN_API_KEY": os.environ['MAILGUN_API_KEY'],
+    #     "MAILGUN_SENDER_DOMAIN": 'mg.poemrad.io',  
+    # }
+    POSTMARK_API_KEY     = os.environ['POSTMARK_API_TOKEN']
+    
 

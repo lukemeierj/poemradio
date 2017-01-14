@@ -6,6 +6,8 @@ from django.utils import timezone
 import random
 import math
 import operator
+from tagging.fields import TagField
+
 
 def dot_product(v1, v2):
     return sum(map(operator.mul, v1, v2))
@@ -24,7 +26,7 @@ def cosSimilarity(v1, v2, standardize = False):
 class PoemUser(models.Model):
     user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
     safeMode = models.BooleanField(default = False)
-    preferences = models.ManyToManyField('tags.Tag', blank=True)
+    preferences = TagField()
     similar = models.ManyToManyField('self', default = [])
     agreed_tos = models.BooleanField(default = False)
     promo_email = models.BooleanField(default = False)
