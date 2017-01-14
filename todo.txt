@@ -1,7 +1,6 @@
-    .fix safari
     .? fix issue where you lose a poem if you aren't signed in
-
-keep next out of main content area without losing right edge
+don't have white alert go over text, maybe?
 make profile page
 edit poems
 delete account
+color stays the same mobile vote

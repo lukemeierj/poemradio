@@ -6,9 +6,10 @@ p, h1, h2, h3, .glyphicon, input, label {
 }
 p, h1, h2, input, label, .glyphicon {
   text-shadow: 0 0 0.2px #3a3a3a;
-
 }
-
+.glyphicon {
+  font-size: 1.5em;
+}
 .poem-content {
   z-index: 1;
   padding-left: 3em;
@@ -254,7 +255,10 @@ a, a:hover,  a:active, a:visited {
   }
   .terms {
     font-size: 1em;
-    padding-right: 20em;"
+    /*padding-right: 20em;*/
+  }
+  .about {
+    width: 35em;
   }
   #ck-button label {
     padding-left: .5em;
@@ -453,3 +457,39 @@ body {
 .poem-text  a, .terms a, .small  a {
   text-decoration: underline;
 } 
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?w3wxmh');
+  src:  url('../fonts/icomoon.eot?w3wxmh#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?w3wxmh') format('truetype'),
+    url('../fonts/icomoon.woff?w3wxmh') format('woff'),
+    url('../fonts/icomoon.svg?w3wxmh#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-thumb_up {
+  padding-left: .5em;
+  vertical-align: 5px;
+
+}
+.icon-thumb_up:before {
+  content: "\e900";
+}
+.icon-thumb_down:before {
+  content: "\e901";
+}
