@@ -7,4 +7,5 @@ venv
 *.pyc
 staticfiles
 .env
-
+.DS_Store
+*.txt

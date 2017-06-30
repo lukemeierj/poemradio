@@ -1,4 +1,0 @@
-{% load i18n %}
-{% autoescape off %}
-{% blocktrans %}Hey! Email confirmin' time!{% endblocktrans %}
-{% endautoescape %}
