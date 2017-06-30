@@ -69,7 +69,15 @@ textarea, input {
   text-align: right;
   margin-right: 2em;
 }
-
+#logo {
+  height: 6em;
+}
+.logo-row {
+  text-align: right;
+  margin-bottom: -1.2em;
+  margin-top: 2em;
+  margin-right: .02em;
+}
 
 .pressed {
   color: #e8713a;
@@ -168,7 +176,6 @@ a, a:hover,  a:active, a:visited {
 }
 
 #menu {
-  padding-top: 6.8em;
   position: fixed;
   top: 0;
   left: 0;
