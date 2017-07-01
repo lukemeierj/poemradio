@@ -5,12 +5,10 @@
 {% for poem in poems %}
 
     <div class = "poem-content" data-pk= {{poem.pk}}>
-        <h3 class="title"><a href = /{{poem.pk}}>{{poem.title}}</a></h3>
-
-
+        <h2 class="title"><a href = /{{poem.pk}}>{{poem.title}}</a></h2>
         <p class = "poem-text">{{poem.text}}</p><br>
-        <p class = "vote-btn glyphicon glyphicon-chevron-up upvote" data-vote = "1"></p>
-        <p class = "vote-btn glyphicon glyphicon-chevron-down downvote" data-vote = "-1"></p>
+        <p class = "vote-btn glyphicon icon-thumb_down downvote next" data-vote = "-1"></p>
+        <p class = "vote-btn glyphicon icon-thumb_up upvote" data-vote = "1"></p>
         <a href = "..{% url 'user:showUser' poem.author.user.username %}" class = "poem-author"><p class = "small">{{poem.author.user.username}}</p></a>
         <p class="small">{{poem.creation}}</p>
         <p class = "small">Down: <span id="downvotes"> {{poem.downvotes}} </span> - Up: <span id="upvotes">{{poem.upvotes}} </span></p>

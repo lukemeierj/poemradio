@@ -9,3 +9,5 @@ staticfiles
 .env
 .DS_Store
 todo.txt
+*.sqlite3
+
