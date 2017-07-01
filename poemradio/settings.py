@@ -157,7 +157,6 @@ EMAIL_BACKEND = "anymail.backends.sendgrid.EmailBackend"
 DEFAULT_FROM_EMAIL = "Little PoemRad.io Robot <lilrobot@poemrad.io>"
 
 
-
 #Load env key only if no local settings
 try:
     from .local_settings import *
