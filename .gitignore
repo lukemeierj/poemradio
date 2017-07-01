@@ -10,4 +10,5 @@ staticfiles
 .DS_Store
 todo.txt
 *.sqlite3
-
+*.sublime*
+*.csv
