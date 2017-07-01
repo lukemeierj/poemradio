@@ -19,7 +19,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    #todo: allow facebook and google authentication
+    # todo: allow facebook and google authentication
     # 'allauth.socialaccount.providers.facebook',
     # 'allauth.socialaccount.providers.google',
     'poemUser.apps.PoemuserConfig',
