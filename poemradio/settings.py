@@ -150,24 +150,19 @@ STATICFILES_DIRS = (
 )
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-# POSTMARK_SENDER      = 'sender@poemrad.io'
-POSTMARK_TEST_MODE   = False
-POSTMARK_TRACK_OPENS = True
-#Email
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_BACKEND = 'postmark.django_backend.EmailBackend'
 
-# EMAIL_BACKEND = "anymail.backends.mailgun.MailgunBackend"  
-DEFAULT_FROM_EMAIL = "Little PoemRad.io Robot <lilrobot@poemrad.io>"  
+#Email
+EMAIL_BACKEND = "anymail.backends.sendgrid.EmailBackend"
+
+DEFAULT_FROM_EMAIL = "Little PoemRad.io Robot <lilrobot@poemrad.io>"
+
+
 
 #Load env key only if no local settings
 try:
     from .local_settings import *
 except ImportError as e:
-    # ANYMAIL = {
-    #     "MAILGUN_API_KEY": os.environ['MAILGUN_API_KEY'],
-    #     "MAILGUN_SENDER_DOMAIN": 'mg.poemrad.io',  
-    # }
-    POSTMARK_API_KEY     = os.environ['POSTMARK_API_TOKEN']
-    
+    ANYMAIL = {
+        "SENDGRID_API_KEY": os.environ['SENDGRID_API_TOKEN']
+    }  
 
